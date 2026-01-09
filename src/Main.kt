@@ -1,3 +1,6 @@
+import secrets.Secret01
+
 fun main() {
-    HelpMeUnpack().run()
+    //HelpMeUnpack().run()
+    Secret01().getSecretSolution()
 }
