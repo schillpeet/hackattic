@@ -14,6 +14,7 @@ options to do this e.g. with gradle.properties - maybe next time.*
 ## Solved Challenges
 
 - Help me unpack ✅
+- Tales of SSL ✅
 
 ## Solved Secrets
 
