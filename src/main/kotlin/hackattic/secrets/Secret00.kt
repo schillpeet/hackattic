@@ -1,8 +1,11 @@
-package secrets
+package hackattic.secrets
+
+import java.math.BigInteger
+import kotlin.text.iterator
 
 class Secret00 {
-    private companion object {
-        const val SECRET00 = "2DcBKCvVTEV3p83rk1DFYqNs55GzEKxCsnadxZTzKJTEJ1nEm1at1RpyAU2kdB"
+    companion object {
+        private const val SECRET00 = "2DcBKCvVTEV3p83rk1DFYqNs55GzEKxCsnadxZTzKJTEJ1nEm1at1RpyAU2kdB"
     }
 
     /**
@@ -27,10 +30,10 @@ class Secret00 {
         val base58Map = alphabet.withIndex().associate { it.value to it.index }
 
         fun base58Decode(input: String): ByteArray {
-            var num = java.math.BigInteger.ZERO
+            var num = BigInteger.ZERO
             for (c in input) {
-                num = num.multiply(java.math.BigInteger.valueOf(58))
-                    .add(java.math.BigInteger.valueOf(base58Map[c]!!.toLong()))
+                num = num.multiply(BigInteger.valueOf(58))
+                    .add(BigInteger.valueOf(base58Map[c]!!.toLong()))
             }
             return num.toByteArray()
         }

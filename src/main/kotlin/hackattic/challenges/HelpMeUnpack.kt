@@ -1,7 +1,6 @@
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
+package hackattic.challenges
+
+import hackattic.HackatticClient
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.Base64
@@ -31,23 +30,17 @@ private data class Solution(
  * Note:
  * - All values are little endian **except** `bigEndianDouble`
  */
-class HelpMeUnpack {
-
-    private companion object {
-        const val BASE_URL = "https://hackattic.com/challenges/help_me_unpack"
+class HelpMeUnpack(
+    private val hackattic: HackatticClient
+) {
+    companion object {
+        private const val CHALLENGE = "help_me_unpack"
     }
 
-    private val client = HttpClient.newHttpClient()
-    private val token: String = System.getenv("HACKATTIC_TOKEN") ?: error("HACKATTIC_TOKEN not set")
-
     private fun getBase64Input(): String {
-        val req = HttpRequest.newBuilder()
-            .uri(URI.create("$BASE_URL/problem?access_token=$token"))
-            .GET()
-            .build()
-        val base64Res = client.send(req, HttpResponse.BodyHandlers.ofString()).body()
-
-        return Regex(""""bytes"\s*:\s*"([^"]+)"""")
+        val base64Res = hackattic.getProblem(CHALLENGE)
+        val regex = Regex(""""bytes"\s*:\s*"([^"]+)"""")
+        return regex
             .find(base64Res)?.groupValues?.get(1)
             ?: error("Response doesn't contain bytes: '$base64Res'")
     }
@@ -96,7 +89,7 @@ class HelpMeUnpack {
         return Solution(resultInt, resultUInt, resultShort, resultFloat, resultDouble, resultDoubleBigEndian)
     }
 
-    private fun postSolution(solution: Solution) {
+    private fun postSolution(solution: Solution, playground: Boolean) {
         val output = """
             {
             "int": ${solution.int},
@@ -108,21 +101,14 @@ class HelpMeUnpack {
             }
         """.trimIndent()
 
-        val req = HttpRequest.newBuilder()
-            .uri(URI.create("$BASE_URL/solve?access_token=$token"))
-            .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(output))
-            .build()
+        val response = hackattic.sendSolution(CHALLENGE, output, playground)
 
-        val response = client.send(req, HttpResponse.BodyHandlers.ofString())
-
-        //println("solution sent:\n$solution")
-        println("response body:\n${response.body()}")
+        println("response body:\n${response}")
     }
 
-    fun run() {
-        val base64Input = getBase64Input() ?: error("base64Input is null")
+    fun run(playground: Boolean = false) {
+        val base64Input = getBase64Input()
         val values = getUnpackedBytes(base64Input)
-        postSolution(values)
+        postSolution(values, playground)
     }
 }

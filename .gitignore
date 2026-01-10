@@ -5,5 +5,10 @@ out/
 .idea/
 *.iml
 
+### Gradle ###
+!gradle/wrapper/gradle-wrapper.jar
+.gradle
+build/
+
 ### Mac OS ###
 .DS_Store

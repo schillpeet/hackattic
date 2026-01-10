@@ -1,4 +1,4 @@
-package secrets
+package hackattic.secrets
 
 /**
  * Analysis of the encrypted text:
@@ -23,8 +23,8 @@ package secrets
  * - Letter 1 by base + 1, letter 2 by base + 2, and so on.
  */
 class Secret01 {
-    private companion object {
-        const val SECRET01 = "wfno, cltu, irza! afjmapqhvf syefsm-czxiwcw kdcghp. cppjvfzbtjdtaag! kzx nkissipp mx \"pjbck-xpsft\"."
+    companion object {
+        private const val SECRET01 = "wfno, cltu, irza! afjmapqhvf syefsm-czxiwcw kdcghp. cppjvfzbtjdtaag! kzx nkissipp mx \"pjbck-xpsft\"."
     }
 
     // progressive Caesar or Caesar (Shift) Cipher

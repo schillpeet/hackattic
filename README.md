@@ -2,6 +2,11 @@
 
 visit: https://hackattic.com/
 
-## Solved challenges
+## Solved Challenges
 
 - Help me unpack ✅
+
+## Solved Secrets
+
+- Secret #0:  ✅
+- Secret #1:  🥸
