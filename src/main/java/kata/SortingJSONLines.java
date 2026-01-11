@@ -18,5 +18,6 @@ public class SortingJSONLines {
         for(Map.Entry<String, Integer> result : results) {
             System.out.println(result.getKey() + ": " + String.format("%,d", result.getValue()));
         }
+        input.close();
     }
 }

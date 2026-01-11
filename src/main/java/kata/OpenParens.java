@@ -20,5 +20,6 @@ public class OpenParens {
             if (stack.isEmpty()) System.out.println("yes");
             else System.out.println("no");
         }
+        scanner.close();
     }
 }

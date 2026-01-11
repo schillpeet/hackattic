@@ -13,5 +13,6 @@ public class WhatDayWasIt {
             int inputDays = Integer.parseInt(input.nextLine());
             System.out.println(refDate.plusDays(inputDays).getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
         }
+        input.close();
     }
 }

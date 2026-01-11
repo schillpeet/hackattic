@@ -20,5 +20,6 @@ public class TheSumOfThings {
             }
             System.out.println(result);
         }
+        scanner.close();
     }
 }
