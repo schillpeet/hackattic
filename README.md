@@ -27,8 +27,8 @@ options to do this e.g. with gradle.properties - maybe next time.*
 - Debasing64 ✅
 - Open Parens ✅
 - The Sum Of Things ✅
-- Yes It Fizz ✅
-  Almost Binary ✅
+- Yes It Fizz ✅ 
+- Almost Binary ✅
 - It Is Almost Compression ✅
 - Sorting JSON Lines ✅
 - What Day Was It ✅
