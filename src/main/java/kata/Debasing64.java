@@ -14,7 +14,7 @@ import java.util.Scanner;
  * CTRL+C will stop the program or just Type EXIT
  */
 class Debasing64 {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Base64.Decoder decoder = Base64.getDecoder();
         while (scanner.hasNext()) {
