@@ -26,14 +26,15 @@ options to do this e.g. with gradle.properties - maybe next time.*
 - java solutions are located in: `src/main/java/kata`
 - python solutions are located in: `kata-others/kata-python`
 
-| Name                         | Java | Python | C++ |
-|------------------------------|------|--------|-----|
-| A Case Of Snake              | ✅   |        |     |
-| Debasing64                   | ✅   |        |     |
-| Open Parens                  | ✅   | ✅     |     |
-| The Sum Of Things            | ✅   |        |     |
-| Yes It Fizz                  | ✅   | ✅     | ✅   |
-| Almost Binary                | ✅   | ✅     |     |
-| It Is Almost Compression     | ✅   |        |     |
-| Sorting JSON Lines           | ✅   |        |     |
-| What Day Was It              | ✅   |        |     |
+| Name                         | Java | Python | C++ | Haskell |
+|------------------------------|------|--------|-----|---------|
+| A Case Of Snake              | ✅   | ✅     |     |         |
+| Almost Binary                | ✅   | ✅     |     |         |
+| Debasing64                   | ✅   |        |     |         |
+| It Is Almost Compression     | ✅   |        |     |         |
+| Open Parens                  | ✅   | ✅     |     |         |
+| Sorting JSON Lines           | ✅   |        |     |         |
+| The Sum Of Things            | ✅   |        |     |         |
+| What Day Was It              | ✅   |        |     |         |
+| Yes It Fizz                  | ✅   | ✅     | ✅   | ✅       |
+
