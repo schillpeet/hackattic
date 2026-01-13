@@ -21,10 +21,10 @@ options to do this e.g. with gradle.properties - maybe next time._
 - Secret #0: ✅
 - Secret #1: 🥸
 
-## Solved Kata (in Java)
+## Solved Kata
 
 - java solutions are located in: `src/main/java/kata`
-- python solutions are located in: `kata-others/kata-python`
+- all other solutions are located in: `kata-others/kata-python`
 
 | Name                     | Java | Python | C++ | Haskell | JavaScript |
 | ------------------------ | ---- | ------ | --- | ------- | ---------- |
