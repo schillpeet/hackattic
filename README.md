@@ -1,6 +1,6 @@
 # HackAttic
 
-visit: https://hackattic.com/
+Take a look at: https://hackattic.com/
 
 ## Setup
 
