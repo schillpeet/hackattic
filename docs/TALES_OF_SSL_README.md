@@ -1,90 +1,104 @@
-# Tales of SSL
+# 🔐 Tales of SSL: The Road to a Certificate
 
-### read it
+This documentation describes my journey from an abstract data structure to a finished cryptographic certificate.
 
-- https://darutk.medium.com/illustrated-x-509-certificate-84aece2c5c2e
+## 🏗 The Layered Architecture (The Serialization Chain)
 
-## X.509 Certificate (RFC 5280)
+When we talk about a certificate, we go through a chain of formats. You can imagine it like an onion:
 
-ASN.1 = abstract structure
-⇒
-DER = Distinguished Encoding Rules (embodied byte sequence)
-⇒
-Base64 = format conversion
-⇒
-PEM (decoration)
+1. **ASN.1 (Abstract Syntax Notation One):** The logical “blueprint” (structure).
+2. **DER (Distinguished Encoding Rules):** The binary representation of the structure (hex look).
+3. **Base64:** The conversion of binary data into printable text.
+4. **PEM (Privacy Enhanced Mail):** The decorative format for storing as a file.
 
-ASN.1 (abstract) converts certificate (RFC 5280) to a 
-DER binary data in X.690 (looks like HEX) which is also
-converted to Base64 (RFC 4648) text data.
+## Examples
 
-If we add at the top and end of this Base64 text the following
-lines:
+### ASN.1 Format (Abstract)
+
+It almost looks like code or a JSON structure:
+
+```text
+Certificate ::= SEQUENCE {
+    tbsCertificate      TBSCertificate,
+    signatureAlgorithm  AlgorithmIdentifier,
+    signatureValue      BIT STRING  }
+```
+
+### DER Format (Binary / Hex)
+
+These are the actual bytes on disk. A hex dump might look like this:
+
+```text
+30 82 03 1a 30 82 02 02 a0 03 02 01 02 02 09 00 ...
+```
+
+Note: The first byte `30` often stands for a SEQUENCE in ASN.1.
+
+### Base64 Format
+
+The binary bytes are translated into text (4 characters for every 3 bytes):
+
+```text
+MIIC9DCCAl2gAwIBAgIJAQAAMAkGByqGSM44BAMwRTELMAkGA1UEBhMCQVUx...
+```
+
+### What is PEM?
+
+A PEM format is essentially just the Base64-encoded DER sequence wrapped with special header and footer decorations. It always has a clear beginning and end:
+
 ```text
 -----BEGIN CERTIFICATE-----
+[Here are the Base64 data]
 -----END CERTIFICATE-----
 ```
 
----
+> https://darutk.medium.com/illustrated-x-509-certificate-84aece2c5c2e
 
-In the challenges is the question 'what's PEM? Is this a PEM? 
-Wait, is it a CRT? With ASN? And where's my CSR?'
+## TBS – _To Be Signed_
 
-But we have just the requirement 'the requested certificate 
-in base64 encoded DER format'.
+A central concept in X.509 is the **TBS section (To Be Signed)**.  
+It refers **exactly to the part of a structure that is cryptographically signed — and nothing beyond that.**
 
-⇒ We need ASN as basic format.
-⇒ I think, we dont need PEM
+### Example: Certificate (X.509)
 
-### CSR (Certificate Signing Request) – The Order
+A CSR (Certificate Signing Request) logically consists of three parts:
 
-It contains:
-- information about us: domain name, organization, country
-- out public key
-- generated private key
+1. **TBSCertificate**
+   - Subject (identity)
+   - SubjectPublicKeyInfo
+   - Validity (NotBefore / NotAfter)
+   - Extensions (SAN, KeyUsage, …)
+2. **SignatureAlgorithm**
+3. **SignatureValue**
 
-### CRT (Certificate) - The Certificate
+So when we sign the TBS with our private key, we send it to a certification authority (CA) which, in turn, signs the certificate and sends it back to us.  
+The result is a CRT (= certificate).
 
-It's the finished Certificate. It contains:
-- our public key
-- our data
-- digital signature
+## Self-Signed Certificates: The Process
 
----
+When we create a self-signed certificate, we take on two roles at once: the applicant and the certification authority (CA).
 
-What have we to do?
+The process:
 
-We have to create a self-signed certificate. That means,
-first of all, we create a CSR (and haven't send it to a 
-CA - Certificate Authority), because we are self the CA!
-Then self-signe this CSR with the private key (our signature)
-and we have the CRT!
+1. Generate a key pair: We need a private key (secret). From it, we derive the public key (public).
+2. Build the TBS block: Combine your public key and identity information (name, domain).
+3. Sign: Take the TBS block and sign it with your own private key.
+4. Assemble: Combine the TBS block, the algorithm name, and the freshly created signature.
 
-public key + personal data = CSR
-⇒
-CSR + private Key = CRT (Signed CSR)
+Result: The finished CRT (certificate).
 
----
+Important: In a normal process, we send the TBS data as a CSR (Certificate Signing Request) to an external CA. That CA then signs the block with its private key. In a "self-signed" setup, we use our own key instead.
 
-Steps:
-
-1. create a CertificationRequestInfo (https://datatracker.ietf.org/doc/html/rfc2986#section-3)
-   2. A CertificationRequestInfo value containing 
-      3. a subject distinguished name, 
-      4. a subject public key, 
-      5. and optionally a set of attributes is constructed by an entity requesting
-         certification.
-6. sign the CertificationRequestInfo with the subject entity's private key.
-7. Then add a signature algorithm identifier
-
----
-
-### Determinate kind of private key
+## Analyzing an Existing Private Key
 
 ```shell
-$ echo "MIICXQIBAAKBgQCsNehz1yyou+PCaODGcL67Ox3NJuK7AxArOaQ5P/Zh6csjvNyh2vLXhuhN/5Lx35eQSWT5jL6aPNrP9KBTFb+YRiwjlFenuhsP0nGcPTtsFGjaRpRNRU4xrHyoU3IlP7gY2uKCHfCJgZTxeV6p5BilvJTzGd135w62rIvtbOSDgwIDAQABAoGAa+U2p+WH6IwX7kVRl2MqTRqD2HZllfAcYEi0GN53Wu9lRBXfUlVg0yKGR+A5y+tgBZnGdwf0n6RDIAnPrV6x9AjYll/odPPqhnzG7QzzfmUzzgLVjmusVZGkqmfvh+Fvu5IjPz9DB/HibxWc42tIGEMLTZDEUMfx+qa7n98fjhECQQDlYvp6aLHTzhhcZowcYnDS9dYCfHVRlzkP4RKFCChPgBZIhu5vXjTuNPTzIMTqbgeVSx/j3bd/0WxXOmTSsEfJAkEAwDC9w0xRlwY+qJ2tdCHv2SLxq5v9uecOq4T/L7sO21wyHibSxFW/Sb91G6YGZEziDc3O68uVQg6+wq9BRgiu6wJBAI0UMf9lMrGU2PDDdTrj5IYrAoOm7jTPMB4vDEfbe4dhvNLAghbmtuEmmtyJc/LG100f1i48J+ap89s2I9pc5tkCQQCsv2LiF0hDAkbx0oClIRfwSVuGT7kZDxl9jBa/tVheTZlyxpyuAxDkXeYKSwn1v7F0jOgPw7bOYGiQn2yBYa6vAkBM7Xqwa5QLvuzsiSt2njO/zhCVB9YkkVBjFt101L+ySHeCsrK8t8I65rZYAuLWRVY/8ahF7F/lrSRxr7QdVg0C" \
-| base64 -D > key.der
+$ echo <PRIVATE_KEY> | base64 -D > key.der
 $ openssl pkey -inform DER -in key.der -text -noout
+```
+
+### Output
+
+```text
 Private-Key: (1024 bit, 2 primes)
 modulus: (...)
 publicExponent: 65537 (0x10001)
@@ -96,5 +110,20 @@ exponent2: (...)
 coefficient: (...)
 ```
 
-Take a look at (https://www.rfc-editor.org/rfc/rfc8017#appendix-A.1.2).
-What we see is a RSA Private Key Syntax.
+This structure exactly matches the RSA Private Key syntax. Since we see fields like modulus, publicExponent, and the various primes, we can confidently conclude that it’s an RSA key.  
+For reference, see [RFC8017](https://www.rfc-editor.org/rfc/rfc8017#appendix-A.1.2).
+
+## 🏁 Summary: The 5 Steps to a Certificate
+
+1. Choose the ASN.1 structure: Define what should appear in the certificate (RFC 5280).
+2. Fill the TBS data: Add identity and public key information.
+3. DER encoding: Convert the TBS data into a unique binary format.
+4. Sign: Hash and encrypt the binary TBS block (signature).
+5. Wrap: Encode everything in Base64 and surround it with `-----BEGIN CERTIFICATE-----`.
+
+## Helpful References
+
+- RFC 5280: The “constitution” for X.509 certificates.
+- RFC 2986: Specification for CSRs (PKCS#10).
+- X.690: The standard for DER encoding.
+- (https://darutk.medium.com/illustrated-x-509-certificate-84aece2c5c2e) (Highly recommended for visual learners).
