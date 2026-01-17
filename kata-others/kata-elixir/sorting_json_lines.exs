@@ -30,9 +30,3 @@ end)
 |> Enum.each(fn {balance, name} ->
   IO.puts("#{name}: #{format_num.(Integer.to_string(balance))}")
 end)
-
-# {"Alton.K":{"balance":9315,"account_no":203123613,"extra":{"balance":131}}}
-# {"Bancroft.M":{"balance": 233,"account_no":287655771101,"extra":{"balance":98}}}
-# {"Barclay.E":{"balance":1123,"account_no":312333321}}
-
-# {"Bentley.G":{"balance":2134,"account_no":233831255"}}
