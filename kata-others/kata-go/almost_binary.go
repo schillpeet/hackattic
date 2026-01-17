@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func main() {
+func almost_binary() {
 	s := bufio.NewScanner(os.Stdin)
 	r := strings.NewReplacer("#", "1", ".", "0")
 	for s.Scan() {
@@ -16,3 +16,7 @@ func main() {
 		fmt.Println(v)
 	}
 }
+
+/* func main() {
+	almost_binary()
+} */
