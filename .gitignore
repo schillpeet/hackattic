@@ -15,3 +15,6 @@ build/
 
 ### Others
 .env
+
+### Rust
+kata-others/kata-rust/target
