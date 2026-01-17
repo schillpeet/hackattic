@@ -34,6 +34,7 @@ func a_case_of_snakes() {
 	}
 }
 
-func main() {
+/* func main() {
 	a_case_of_snakes()
 }
+*/
