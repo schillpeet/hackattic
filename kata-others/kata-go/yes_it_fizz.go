@@ -29,6 +29,8 @@ func yes_it_fizz() {
 	}
 }
 
+/*
 func main() {
 	yes_it_fizz()
 }
+*/
