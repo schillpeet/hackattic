@@ -33,6 +33,8 @@ func open_parens() {
 	}
 }
 
+/*
 func main() {
 	open_parens()
 }
+*/
