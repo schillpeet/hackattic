@@ -28,17 +28,20 @@ class Secret01 {
     }
 
     // progressive Caesar or Caesar (Shift) Cipher
-    private fun progressiveCaesar(base: Int): String {
+    private fun progressiveCaesar(base: Int = 0): String {
         var pos = 0
         return SECRET01.map { c ->
-            when {
+            val result = when {
                 c in 'a'..'z' -> {
-                    val r = (c - 'a' - base - pos + 26 * 10) % 26
-                    pos++
-                    'a' + r
+                    val shift = (base + pos) % 26
+                    var res = (c - 'a' - shift) % 26
+                    if (res < 0) res += 26
+                    'a' + res
                 }
                 else -> c
             }
+            pos++
+            result
         }.joinToString("")
     }
 
@@ -49,32 +52,13 @@ class Secret01 {
      * different base shifts. For each tested base value, one meaningful
      * plaintext word appeared at a consistent position in the output.
      *
-     * Examples:
-     * - base = 0,2,4  → "well"
-     * - base = 6  → "impressive"
-     * - base = 7  → "puzzle"
-     * - base = 8  → "solving"
-     * - base = 9  → "skills"
-     * - base = 11 → "congratulations"
-     * - base = 13 → "the"
-     * - base = 14 → "solution"
-     * - base = 15 → "is"
-     * - base = 17 → "harry"
-     * - base = 18 → "jacob"
-     *
      * Final result:
      * well, well, well! impressive puzzle-solving skills. congratulations! the solution is "harry-jacob".
      *
-     * These valid words appear at the same logical positions across different
-     * base shifts, confirming the use of a progressive Caesar cipher where
-     * the shift increases by 1 for each letter.
-     *
-     * Combining the meaningful results yields the final solution:
+     * Combining the meaningful results yields the final solution isn't the final solution 😂:
      * "harry-jacob".
      */
     fun getSecretSolution() {
-        for (base in 0..<26) {
-            progressiveCaesar(base).also { println(it) }
-        }
+        println(progressiveCaesar())
     }
 }

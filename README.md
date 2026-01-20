@@ -26,17 +26,17 @@ options to do this e.g. with gradle.properties - maybe next time._
 - java solutions are located in: `src/main/java/kata`
 - all other solutions are located in: `kata-others/kata-python`
 
-| Name                     | Java | Python | C++ | Haskell | JavaScript | Ruby | Perl | Elixir | Rust |
-| ------------------------ | ---- | ------ | --- | ------- | ---------- | ---- | ---- | ------ | ---- |
-| A Case Of Snake          | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   |
-| Almost Binary            | ✅   | ✅     |     |         | ✅         | ✅   | ✅   | ✅     | ✅   |
-| Debasing64               | ✅   |        |     |         | ✅         | ✅   | ✅   | ✅     | ✅   |
-| It Is Almost Compression | ✅   |        |     |         |            | ✅   | ✅   | ✅     |      |
-| Open Parens              | ✅   | ✅     |     |         |            | ✅   | ✅   | ✅     |      |
-| Sorting JSON Lines       | ✅   |        |     |         |            | ✅   | ✅   | ✅     |      |
-| The Sum Of Things        | ✅   |        |     |         | ✅         | ✅   | ✅   | ✅     |      |
-| What Day Was It          | ✅   |        |     |         |            | ✅   | ✅   | ✅     |      |
-| Yes It Fizz              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     |      |
+| Name                     | Java | Python | C++ | Haskell | JavaScript | Ruby | Perl | Elixir | Rust | Go |
+| ------------------------ | ---- | ------ | --- | ------- | ---------- | ---- | ---- | ------ | ---- | | -- |
+| A Case Of Snake          | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅ |
+| Almost Binary            | ✅   | ✅     |     |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅ |
+| Debasing64               | ✅   |        |     |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅ |
+| It Is Almost Compression | ✅   |        |     |         |            | ✅   | ✅   | ✅     |      | ✅ |
+| Open Parens              | ✅   | ✅     |     |         |            | ✅   | ✅   | ✅     |      |  |
+| Sorting JSON Lines       | ✅   |        |     |         |            | ✅   | ✅   | ✅     |      |  |
+| The Sum Of Things        | ✅   |        |     |         | ✅         | ✅   | ✅   | ✅     |      |  |
+| What Day Was It          | ✅   |        |     |         |            | ✅   | ✅   | ✅     |      | ✅ |
+| Yes It Fizz              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     |      |✅  |
 
 ## Insights
 

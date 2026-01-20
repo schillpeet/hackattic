@@ -10,7 +10,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation("tools.jackson.module:jackson-module-kotlin:3.0.+")
+    implementation("tools.jackson.module:jackson-module-kotlin:3.0.3")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
 
     // crypto
