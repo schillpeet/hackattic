@@ -25,6 +25,8 @@ func the_sum_of_things() {
 		fmt.Println(result)
 	}
 }
-func main() {
+
+/* func main() {
 	the_sum_of_things()
 }
+*/
