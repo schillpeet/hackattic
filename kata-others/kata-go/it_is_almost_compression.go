@@ -41,6 +41,7 @@ func appendResult(result *strings.Builder, curValue rune, count int) {
 	}
 }
 
-func main() {
+/* func main() {
 	it_is_almost_compression()
 }
+*/
