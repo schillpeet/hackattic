@@ -19,6 +19,6 @@ func what_day_was_it() {
 	}
 }
 
-func main() {
+/* func main() {
 	what_day_was_it()
-}
+} */
