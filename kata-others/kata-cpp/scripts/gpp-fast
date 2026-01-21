@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-g++ "$1" -o /tmp/tmpprog && /tmp/tmpprog
+g++ -x c++ "$1" -o /tmp/tmpprog && /tmp/tmpprog
