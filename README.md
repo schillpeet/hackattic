@@ -21,7 +21,7 @@ options to do this e.g. with gradle.properties - maybe next time._
 - Secret #0: ✅
 - Secret #1: 🥸
 
-## Solved Kata
+## Solved Kata (all 😎)
 
 - java solutions are located in: `src/main/java/kata`
 - all other solutions are located in: `kata-others/*`
@@ -32,9 +32,9 @@ options to do this e.g. with gradle.properties - maybe next time._
 | Almost Binary            | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
 | Debasing64               | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
 | It Is Almost Compression | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| Open Parens              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| Sorting JSON Lines       | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| The Sum Of Things        | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| Open Parens              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
+| Sorting JSON Lines       | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
+| The Sum Of Things        | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
 | What Day Was It          | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
 | Yes It Fizz              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
 
