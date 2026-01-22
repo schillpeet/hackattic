@@ -24,7 +24,7 @@ options to do this e.g. with gradle.properties - maybe next time._
 ## Solved Kata
 
 - java solutions are located in: `src/main/java/kata`
-- all other solutions are located in: `kata-others/kata-python`
+- all other solutions are located in: `kata-others/*`
 
 | Name                     | Java | Python | C++ | Haskell | JavaScript | Ruby | Perl | Elixir | Rust | Go  | PHP |
 | ------------------------ | ---- | ------ | --- | ------- | ---------- | ---- | ---- | ------ | ---- | --- | --- |
