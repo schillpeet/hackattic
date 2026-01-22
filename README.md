@@ -43,4 +43,5 @@ options to do this e.g. with gradle.properties - maybe next time._
 - Certificate generation is awesome. (Alternatively: Creating certificates is a great way to track progress.)
 - Ruby is a powerful and elegant language – definitely a keeper!
 - Perl, like Ruby, is a very concise and beautiful language, but you absolutely have to delve deeper into regular expressions – cool language!
-- Base64 refers to the 64 distinct characters used for encoding; there are many variations like Base62 (often used for URL shorteners) or even Base58 (used in Bitcoin).
+- Base64 refers to the 64 distinct characters used for encoding; there are many variations like Base62 (often used for URL shortness) or even Base58 (used in Bitcoin).
+- Haskell: realized once again how beautiful FP is!
