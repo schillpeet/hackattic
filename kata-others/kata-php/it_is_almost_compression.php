@@ -2,8 +2,6 @@
 
 $f = fopen( 'php://stdin', 'r' );
 
-
-
 while( $line = fgets( $f ) ) {
     preg_match_all('/(.)\1*/', $line, $matches);
     foreach ($matches[0] as $group) {
