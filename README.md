@@ -29,13 +29,13 @@ options to do this e.g. with gradle.properties - maybe next time._
 | Name                     | Java | Python | C++ | Haskell | JavaScript | Ruby | Perl | Elixir | Rust | Go  | PHP |
 | ------------------------ | ---- | ------ | --- | ------- | ---------- | ---- | ---- | ------ | ---- | --- | --- |
 | A Case Of Snake          | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| Almost Binary            | ✅   | ✅     | ✅  |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| Debasing64               | ✅   | ✅     | ✅  |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| It Is Almost Compression | ✅   | ✅     | ✅  |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| Open Parens              | ✅   | ✅     | ✅  |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| Sorting JSON Lines       | ✅   | ✅     | ✅  |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| The Sum Of Things        | ✅   | ✅     | ✅  |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
-| What Day Was It          | ✅   | ✅     | ✅  |         | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| Almost Binary            | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| Debasing64               | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| It Is Almost Compression | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| Open Parens              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| Sorting JSON Lines       | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| The Sum Of Things        | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
+| What Day Was It          | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
 | Yes It Fizz              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  |     |
 
 ## Insights
