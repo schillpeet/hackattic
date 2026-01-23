@@ -40,6 +40,23 @@ class HackatticClient(
        return executeRequest(req, challenge)
     }
 
+    private fun executeBinaryRequest(req: HttpRequest): ByteArray {
+        val response = client.send(req, HttpResponse.BodyHandlers.ofByteArray())
+        require(response.statusCode() in 200..299) {
+            "Binary request failed with status ${response.statusCode()}"
+        }
+        return response.body()
+    }
+
+    fun downloadFile(url: String): ByteArray {
+        val req = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .GET()
+            .build()
+
+        return executeBinaryRequest(req)
+    }
+
     fun sendSolution(challenge: String, solution: String, playground: Boolean): String {
         val req = HttpRequest.newBuilder()
             .uri(buildChallengeUrl(challenge, "solve", playground))

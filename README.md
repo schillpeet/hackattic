@@ -15,6 +15,7 @@ options to do this e.g. with gradle.properties - maybe next time._
 
 - Help me unpack ✅
 - Tales of SSL ✅
+- Brute force ZIP ✅
 
 ## Solved Secrets
 
@@ -45,3 +46,4 @@ options to do this e.g. with gradle.properties - maybe next time._
 - Perl, like Ruby, is a very concise and beautiful language, but you absolutely have to delve deeper into regular expressions – cool language!
 - Base64 refers to the 64 distinct characters used for encoding; there are many variations like Base62 (often used for URL shortness) or even Base58 (used in Bitcoin).
 - Haskell: realized once again how beautiful FP is!
+- Traditional PKZIP (zip -e) cracks damn fast (<0.1s) with John the Ripper ✌️ – use 7z+AES256, tar+GPG, or age (perfect for scripts & automation) instead.

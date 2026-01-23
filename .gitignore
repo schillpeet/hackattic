@@ -18,3 +18,10 @@ build/
 
 ### Rust
 kata-others/kata-rust/target
+
+### John the Ripper
+hacksession.log
+hacksession.rec
+
+### working direcotry - just temp files
+challenge_work/

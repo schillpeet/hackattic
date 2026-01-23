@@ -72,9 +72,9 @@ internal class UtilsOfTales() {
     }
 }
 
-class TalesOfSSL(
-    private val hackattic: HackatticClient
-) {
+class TalesOfSSL (
+    override val hackattic: HackatticClient
+): ChallengeIT {
     companion object {
         private const val CHALLENGE = "tales_of_ssl"
     }
@@ -128,7 +128,7 @@ class TalesOfSSL(
         println("response body:\n${response}")
     }
 
-    fun run(playground: Boolean = false) {
+    override fun run(playground: Boolean) {
         val getProblem = hackattic.getProblem(CHALLENGE)
         val mapper = jacksonObjectMapper()
         val certRes = mapper.readValue(getProblem, CertificateResponse::class.java)

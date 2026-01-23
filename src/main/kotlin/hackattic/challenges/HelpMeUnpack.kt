@@ -31,8 +31,8 @@ private data class Solution(
  * - All values are little endian **except** `bigEndianDouble`
  */
 class HelpMeUnpack(
-    private val hackattic: HackatticClient
-) {
+    override val hackattic: HackatticClient
+): ChallengeIT {
     companion object {
         private const val CHALLENGE = "help_me_unpack"
     }
@@ -106,7 +106,7 @@ class HelpMeUnpack(
         println("response body:\n${response}")
     }
 
-    fun run(playground: Boolean = false) {
+    override fun run(playground: Boolean) {
         val base64Input = getBase64Input()
         val values = getUnpackedBytes(base64Input)
         postSolution(values, playground)

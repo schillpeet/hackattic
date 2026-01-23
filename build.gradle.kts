@@ -23,6 +23,9 @@ dependencies {
 
     // language -> find all country code; the java Locale() isn't fit enough
     implementation("com.neovisionaries:nv-i18n:1.29")
+
+    // to deal with passwort protected zip files
+    //implementation("net.lingala.zip4j:zip4j:2.11.5") --> to lame, use john the ripper instead
 }
 tasks.test {
     useJUnitPlatform()
