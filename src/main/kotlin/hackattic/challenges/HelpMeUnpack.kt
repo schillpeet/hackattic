@@ -31,8 +31,8 @@ private data class Solution(
  * - All values are little endian **except** `bigEndianDouble`
  */
 class HelpMeUnpack(
-    override val hackattic: HackatticClient
-): ChallengeIT {
+    val hackattic: HackatticClient
+): TaskIT {
     companion object {
         private const val CHALLENGE = "help_me_unpack"
     }

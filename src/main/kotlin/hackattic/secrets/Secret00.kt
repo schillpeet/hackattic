@@ -1,9 +1,10 @@
 package hackattic.secrets
 
+import hackattic.challenges.TaskIT
 import java.math.BigInteger
 import kotlin.text.iterator
 
-class Secret00 {
+class Secret00: TaskIT {
     companion object {
         private const val SECRET00 = "2DcBKCvVTEV3p83rk1DFYqNs55GzEKxCsnadxZTzKJTEJ1nEm1at1RpyAU2kdB"
     }
@@ -25,7 +26,7 @@ class Secret00 {
      * random → Base58 / 62
      *
      */
-    fun getSecretSolution() {
+    private fun getSecretSolution() {
         val alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
         val base58Map = alphabet.withIndex().associate { it.value to it.index }
 
@@ -40,5 +41,9 @@ class Secret00 {
 
         val decoded = base58Decode(SECRET00)
         println(decoded.toString(Charsets.UTF_8))
+    }
+
+    override fun run(playground: Boolean) {
+        getSecretSolution()
     }
 }

@@ -12,8 +12,8 @@ data class ZipUrl(
 )
 
 class BruteForceZip (
-    override val hackattic: HackatticClient,
-): ChallengeIT {
+    val hackattic: HackatticClient,
+): TaskIT {
 
     companion object {
         private const val CHALLENGE = "brute_force_zip"
@@ -94,9 +94,8 @@ class BruteForceZip (
         println("response body:\n${response}")
     }
 
-    private fun sendSecret(secret: String, mapper: ObjectMapper) {
-        val solution = mapper.writeValueAsString(mapOf("secret" to secret))
-        postSolution(solution, false)
+    private fun sendSecret(secret: String, playground: Boolean) {
+        postSolution(secret, playground)
     }
 
     override fun run(playground: Boolean) {
@@ -108,9 +107,10 @@ class BruteForceZip (
         val zipFile = File(workDir, "secret.zip")
 
         Files.write(zipFile.toPath(), zipData)
-        val secret = runBruteForceWithJohnTheRipper()
+        val solution = runBruteForceWithJohnTheRipper()
 
-        sendSecret(secret, mapper)
+        val secret = mapper.writeValueAsString(mapOf("secret" to solution))
+        sendSecret(secret, playground)
     }
 
 }

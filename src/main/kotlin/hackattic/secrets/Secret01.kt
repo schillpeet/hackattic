@@ -1,5 +1,7 @@
 package hackattic.secrets
 
+import hackattic.challenges.TaskIT
+
 /**
  * Analysis of the encrypted text:
  *
@@ -22,7 +24,7 @@ package hackattic.secrets
  * - Letter 0 is shifted by the base value.
  * - Letter 1 by base + 1, letter 2 by base + 2, and so on.
  */
-class Secret01 {
+class Secret01: TaskIT {
     companion object {
         private const val SECRET01 = "wfno, cltu, irza! afjmapqhvf syefsm-czxiwcw kdcghp. cppjvfzbtjdtaag! kzx nkissipp mx \"pjbck-xpsft\"."
     }
@@ -58,7 +60,7 @@ class Secret01 {
      * Combining the meaningful results yields the final solution isn't the final solution 😂:
      * "harry-jacob".
      */
-    fun getSecretSolution() {
+    override fun run(playground: Boolean) {
         println(progressiveCaesar())
     }
 }

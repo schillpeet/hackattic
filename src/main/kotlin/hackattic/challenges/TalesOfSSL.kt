@@ -73,8 +73,8 @@ internal class UtilsOfTales() {
 }
 
 class TalesOfSSL (
-    override val hackattic: HackatticClient
-): ChallengeIT {
+    val hackattic: HackatticClient
+): TaskIT {
     companion object {
         private const val CHALLENGE = "tales_of_ssl"
     }
@@ -134,6 +134,6 @@ class TalesOfSSL (
         val certRes = mapper.readValue(getProblem, CertificateResponse::class.java)
         val selfSignedCertificateBase64 = generateSelfSignedCertificate(certRes)
         val solution = mapper.writeValueAsString(mapOf("certificate" to selfSignedCertificateBase64))
-        postSolution(solution, false)
+        postSolution(solution, playground)
     }
 }
