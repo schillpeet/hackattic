@@ -11,6 +11,32 @@ $ echo <YOUR_HACKATTIC_TOKEN> > .env
 _INFO: I implemented `dotenv()` to get my token but there are other
 options to do this e.g. with gradle.properties - maybe next time._
 
+## Start
+
+Tasks are started via the HackatticDispatcher from main.
+
+There are two kinds of tasks:
+
+- Challenges (Hackattic challenges, require your access token -> see setup)
+- Secrets (local secret tasks, no token required)
+
+You select the task by passing the corresponding enum value:
+
+- Challenge.<Name> refers to a Hackattic challenge (CamelCase)
+- Secret.<Name> refers to a local secret task
+- playground = true enables Hackattic playground mode (optional, default is false)
+
+```kotlin
+fun main() {
+    // Run a Hackattic challenge
+    HackatticDispatcher().run(Challenge.TalesOfSSL, playground = true)
+
+    // Run a secret task
+    HackatticDispatcher().run(Secret.Secret01)
+}
+
+```
+
 ## Solved Challenges
 
 - Help me unpack ✅
