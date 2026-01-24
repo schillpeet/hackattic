@@ -22,9 +22,9 @@ There are two kinds of tasks:
 
 You select the task by passing the corresponding enum value:
 
-- Challenge.<Name> refers to a Hackattic challenge (CamelCase)
-- Secret.<Name> refers to a local secret task
-- playground = true enables Hackattic playground mode (optional, default is false)
+- `Challenge.<Name>` refers to a Hackattic challenge (CamelCase)
+- `Secret.<Name>` refers to a local secret task
+- `playground = true` enables Hackattic playground mode (optional, default is false)
 
 ```kotlin
 fun main() {
