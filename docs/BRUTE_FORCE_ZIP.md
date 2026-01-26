@@ -55,7 +55,7 @@ $ zipinfo -v secret.zip
 
 ### Password Verification Optimization
 
-If we take the highest byte of this CRC32 value `0xEF`, we have our checksum byte. When we
+If we take the highest byte of this CRC32 (`0xef6c2b78`) value `0xEF`, we have our checksum byte. When we
 decrypt just the 12-byte encryption header with a password candidate, we can verify if the
 **last byte** of the decrypted header matches `0xEF`. If it matches, we found a candidate.
 

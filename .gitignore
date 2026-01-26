@@ -25,3 +25,7 @@ hacksession.rec
 
 ### working direcotry - just temp files
 challenge_work/
+
+### TOR
+tor-challenge/data/
+tor-challenge/tor.log

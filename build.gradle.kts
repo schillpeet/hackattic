@@ -26,6 +26,9 @@ dependencies {
 
     // to deal with passwort protected zip files
     //implementation("net.lingala.zip4j:zip4j:2.11.5") --> to lame, use john the ripper instead
+
+    // new http client, because java17 http client doesnt support SOCKSv5 proxies
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
 }
 tasks.test {
     useJUnitPlatform()
