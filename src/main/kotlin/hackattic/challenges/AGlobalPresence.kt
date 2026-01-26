@@ -5,7 +5,7 @@ import hackattic.HackatticClient
 import tools.jackson.module.kotlin.jacksonObjectMapper
 
 data class PresenceToken(
-    @field:JsonProperty("presence_token") val presenceToken: String,
+    @field:JsonProperty("presence_token") val token: String,
 )
 
 class AGlobalPresence(
@@ -38,8 +38,8 @@ class AGlobalPresence(
     override fun run(playground: Boolean) {
         val getProblem = javaClient.getProblem(CHALLENGE)
         val jacksonMapper = jacksonObjectMapper()
-        val presenceToken = jacksonMapper.readValue(getProblem, PresenceToken::class.java)
-        val visitedAll = visitTheWorld(presenceToken.presenceToken) // sieht ein wenig seltsam aus
+        val presence = jacksonMapper.readValue(getProblem, PresenceToken::class.java)
+        val visitedAll = visitTheWorld(presence.token)
 
         if (visitedAll) {
             val response = javaClient.sendSolution(CHALLENGE, "{}", playground)
