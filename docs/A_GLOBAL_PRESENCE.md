@@ -70,6 +70,16 @@ ALL INSTANCES READY! You can now start your Kotlin program.
 ```
 
 ### Hint
+
+#### 1. Remove your data files
+
+If you start your tor instances 
+```shell
+$ rm -rf tor-challenge/data_*
+```
+
+#### 2. Change country name(s)
+
 If a connection cannot be established, find out the country in a separate terminal:
 
 ```shell
