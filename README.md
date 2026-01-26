@@ -42,6 +42,7 @@ fun main() {
 - Help me unpack ✅
 - Tales of SSL ✅
 - Brute force ZIP ✅
+- A global presence ✅
 
 ## Solved Secrets
 
