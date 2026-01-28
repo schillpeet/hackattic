@@ -85,12 +85,12 @@ class BruteForceZip (
         val oneTimeUrl = hackattic.getProblem(CHALLENGE)
         val url = mapper.readValue(oneTimeUrl, ZipUrl::class.java).url
             .also { println("one-time-url: $it") }
-        val zip = hackattic.downloadFile(url)
+        val zip = hackattic.getProblemFromDynamicUrl<ByteArray>(url) // Call-Site
         return zip
     }
 
     private fun postSolution(solution: String, playground: Boolean) {
-        val response = hackattic.sendSolution(CHALLENGE, solution, playground)
+        val response = hackattic.submitSolution(CHALLENGE, solution, playground)
         println("response body:\n${response}")
     }
 

@@ -32,63 +32,68 @@ class HackatticClient(
         )
     }
 
-    private fun executeRequest(req: HttpRequest, challenge: String): String {
-        val response = javaHttpClient?.send(req, HttpResponse.BodyHandlers.ofString())
-        require(response?.statusCode() in 200..299) {
-            "Request to $challenge/problem failed with status ${response?.statusCode()}: ${response?.body()}"
-        }
-        return response?.body() ?: error("Request to $challenge/problem failed")
-    }
-
     fun getProblem(challenge: String): String {
         val req = HttpRequest.newBuilder()
             .uri(buildChallengeUrl(challenge, "problem"))
             .GET()
             .build()
-       return executeRequest(req, challenge)
+        return execute(req, bodyHandler())
     }
 
-    private fun executeBinaryRequest(req: HttpRequest): ByteArray {
-        val response = javaHttpClient?.send(req, HttpResponse.BodyHandlers.ofByteArray())
-        require(response?.statusCode() in 200..299) {
-            "Binary request failed with status ${response?.statusCode()}"
+    /**
+     * Generic HTTP response body handlers for different content types.
+     */
+    @Suppress("UNCHECKED_CAST")
+    internal inline fun <reified T> bodyHandler(): HttpResponse.BodyHandler<T> =
+        when (T::class) {
+            ByteArray::class -> HttpResponse.BodyHandlers.ofByteArray()
+            String::class -> HttpResponse.BodyHandlers.ofString()
+            else -> error("Unhandled type ${T::class}")
+        } as HttpResponse.BodyHandler<T>
+
+    /**
+     * Executes an HTTP request with the given body handler.
+     */
+    internal fun <T> execute(
+        req: HttpRequest,
+        handler: HttpResponse.BodyHandler<T>
+    ): T {
+        val client = requireNotNull(javaHttpClient)
+        val response = client.send(req, handler)
+
+        require(response.statusCode() in 200..299) {
+            "Binary request failed with status ${response.statusCode()}"
         }
-        return response?.body() ?: error("Binary request failed")
+        return response.body()
     }
 
-    fun downloadFile(url: String): ByteArray {
+    /**
+     * Fetches content from an arbitrary URL with type-safe response handling.
+     */
+    internal inline fun <reified T> getProblemFromDynamicUrl(url: String): T {
         val req = HttpRequest.newBuilder()
             .uri(URI.create(url))
             .GET()
             .build()
 
-        return executeBinaryRequest(req)
+        return execute(req, bodyHandler())
     }
 
-    fun sendSolution(challenge: String, solution: String, playground: Boolean): String {
+    fun submitSolution(challenge: String, solution: String, playground: Boolean): String {
         val req = HttpRequest.newBuilder()
             .uri(buildChallengeUrl(challenge, "solve", playground))
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(solution))
             .build()
-        return executeRequest(req, challenge)
+        return execute(req, bodyHandler())
     }
 
     fun getMyCountry(presenceToken: String): String {
         val request = okhttp3.Request.Builder()
             .url("https://hackattic.com/_/presence/$presenceToken")
             .build()
-        return okHttpClient?.newCall(request)?.execute().use { response -> response?.body?.string() ?: error("Unexpected response") }
-    }
-
-    fun testLocationResponseViaTor() {
-        val request = okhttp3.Request.Builder()
-            .url("https://get.geojs.io/v1/ip/country.json")
-            .build()
-
-        okHttpClient?.newCall(request)?.execute().use { response ->
-            println("Location Info: ${response?.body?.string()}")
+        return okHttpClient?.newCall(request)?.execute().use {
+            response -> response?.body?.string() ?: error("Empty response body")
         }
     }
-
 }

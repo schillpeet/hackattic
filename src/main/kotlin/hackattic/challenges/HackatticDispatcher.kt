@@ -84,6 +84,11 @@ class HackatticDispatcher {
                 )
                 AGlobalPresence(hackatticClient, clients).run(playground)
             }
+
+            Challenge.VisualBasicMath -> {
+                val hackatticClient = getJavaHttpClient(token)
+                VisualBasicMath(hackatticClient).run(playground)
+            }
         }
     }
 

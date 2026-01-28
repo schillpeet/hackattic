@@ -20,6 +20,7 @@ dependencies {
     // testing
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testImplementation("io.mockk:mockk:1.14.9")
 
     // language -> find all country code; the java Locale() isn't fit enough
     implementation("com.neovisionaries:nv-i18n:1.29")
@@ -29,6 +30,13 @@ dependencies {
 
     // new http client, because java17 http client doesnt support SOCKSv5 proxies
     implementation("com.squareup.okhttp3:okhttp:5.3.2")
+
+    // OCR - for analyzing images
+    implementation("net.sourceforge.tess4j:tess4j:5.18.0")
+    implementation("org.openpnp:opencv:4.9.0-0")
+
+    // Cosmetic implementation to make the slf4j error message disappear.
+    implementation("org.slf4j:slf4j-simple:2.0.9")
 }
 tasks.test {
     useJUnitPlatform()

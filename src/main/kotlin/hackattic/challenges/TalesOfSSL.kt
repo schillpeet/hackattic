@@ -124,7 +124,7 @@ class TalesOfSSL (
     }
 
     private fun postSolution(solution: String, playground: Boolean) {
-        val response = hackattic.sendSolution(CHALLENGE, solution, playground)
+        val response = hackattic.submitSolution(CHALLENGE, solution, playground)
         println("response body:\n${response}")
     }
 

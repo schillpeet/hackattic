@@ -42,7 +42,7 @@ class AGlobalPresence(
         val visitedAll = visitTheWorld(presence.token)
 
         if (visitedAll) {
-            val response = javaClient.sendSolution(CHALLENGE, "{}", playground)
+            val response = javaClient.submitSolution(CHALLENGE, "{}", playground)
             println("response body:\n${response}")
         } else println("Does not visit all countries")
     }

@@ -101,7 +101,7 @@ class HelpMeUnpack(
             }
         """.trimIndent()
 
-        val response = hackattic.sendSolution(CHALLENGE, output, playground)
+        val response = hackattic.submitSolution(CHALLENGE, output, playground)
 
         println("response body:\n${response}")
     }
