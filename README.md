@@ -43,6 +43,7 @@ fun main() {
 - Tales of SSL ✅
 - Brute force ZIP ✅
 - A global presence ✅
+- Visual basic math ✅
 
 ## Solved Secrets
 
