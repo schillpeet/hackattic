@@ -29,3 +29,6 @@ challenge_work/
 ### TOR
 tor-challenge/data/
 tor-challenge/tor.log
+
+### Python
+scripts/venv/
