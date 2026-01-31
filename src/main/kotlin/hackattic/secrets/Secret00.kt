@@ -1,10 +1,10 @@
 package hackattic.secrets
 
-import hackattic.challenges.TaskIT
+import hackattic.challenges.ITask
 import java.math.BigInteger
 import kotlin.text.iterator
 
-class Secret00: TaskIT {
+class Secret00: ITask {
     companion object {
         private const val SECRET00 = "2DcBKCvVTEV3p83rk1DFYqNs55GzEKxCsnadxZTzKJTEJ1nEm1at1RpyAU2kdB"
     }

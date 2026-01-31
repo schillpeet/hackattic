@@ -11,7 +11,7 @@ data class PresenceToken(
 class AGlobalPresence(
     private val javaClient: HackatticClient,
     private val clientsByCountry: Map<String, HackatticClient>
-) : TaskIT {
+) : ITask {
     companion object {
         private const val CHALLENGE = "a_global_presence"
     }

@@ -1,6 +1,6 @@
 package hackattic.secrets
 
-import hackattic.challenges.TaskIT
+import hackattic.challenges.ITask
 
 /**
  * Analysis of the encrypted text:
@@ -24,7 +24,7 @@ import hackattic.challenges.TaskIT
  * - Letter 0 is shifted by the base value.
  * - Letter 1 by base + 1, letter 2 by base + 2, and so on.
  */
-class Secret01: TaskIT {
+class Secret01: ITask {
     companion object {
         private const val SECRET01 = "wfno, cltu, irza! afjmapqhvf syefsm-czxiwcw kdcghp. cppjvfzbtjdtaag! kzx nkissipp mx \"pjbck-xpsft\"."
     }

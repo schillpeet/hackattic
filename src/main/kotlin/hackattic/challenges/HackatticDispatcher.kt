@@ -89,8 +89,15 @@ class HackatticDispatcher {
                 val hackatticClient = getJavaHttpClient(token)
                 VisualBasicMath(hackatticClient).run(playground)
             }
+
+            Challenge.BackupRestore -> {
+                val hackatticClient = getJavaHttpClient(token)
+                BackupRestore(Challenge.BackupRestore.toString().toSnakeCase(), hackatticClient).run(playground)
+            }
         }
     }
+    // TODO: refactor this -> add this to your enum class
+    private fun String.toSnakeCase() = replace(Regex("(?<=.)([A-Z])"), "_$1").lowercase()
 
     private fun runSecret(secretName: Secret) {
         when (secretName) {

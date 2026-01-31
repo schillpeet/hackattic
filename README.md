@@ -39,11 +39,14 @@ fun main() {
 
 ## Solved Challenges
 
+I have written down my thoughts/insights on the challenges in the docs about the challenges.
+
 - Help me unpack ✅
 - Tales of SSL ✅
 - Brute force ZIP ✅
 - A global presence ✅
 - Visual basic math ✅
+- Backup restore ✅
 
 ## Solved Secrets
 

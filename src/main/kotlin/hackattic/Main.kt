@@ -2,7 +2,6 @@ package hackattic
 
 import hackattic.challenges.HackatticDispatcher
 
-
 fun main() {
-    HackatticDispatcher().run(Challenge.VisualBasicMath)
+    HackatticDispatcher().run(Challenge.BackupRestore)
 }

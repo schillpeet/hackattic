@@ -74,7 +74,7 @@ internal class UtilsOfTales() {
 
 class TalesOfSSL (
     val hackattic: HackatticClient
-): TaskIT {
+): ITask {
     companion object {
         private const val CHALLENGE = "tales_of_ssl"
     }

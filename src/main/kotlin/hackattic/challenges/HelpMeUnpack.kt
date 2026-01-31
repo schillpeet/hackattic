@@ -32,7 +32,7 @@ private data class Solution(
  */
 class HelpMeUnpack(
     val hackattic: HackatticClient
-): TaskIT {
+): ITask {
     companion object {
         private const val CHALLENGE = "help_me_unpack"
     }

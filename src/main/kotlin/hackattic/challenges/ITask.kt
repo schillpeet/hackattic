@@ -1,5 +1,5 @@
 package hackattic.challenges
 
-interface TaskIT {
+interface ITask {
     fun run(playground: Boolean = false)
 }

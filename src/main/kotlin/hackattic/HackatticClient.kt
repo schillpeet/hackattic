@@ -79,13 +79,14 @@ class HackatticClient(
         return execute(req, bodyHandler())
     }
 
+    // todo: refactor: Some classes make an extra printout.
     fun submitSolution(challenge: String, solution: String, playground: Boolean): String {
         val req = HttpRequest.newBuilder()
             .uri(buildChallengeUrl(challenge, "solve", playground))
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(solution))
             .build()
-        return execute(req, bodyHandler())
+        return execute<String>(req, bodyHandler()).also { println(it) }
     }
 
     fun getMyCountry(presenceToken: String): String {

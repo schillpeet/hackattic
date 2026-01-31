@@ -19,7 +19,7 @@ data class OcrResult(
 
 class VisualBasicMath(
     private val hackatticClient: HackatticClient
-) : TaskIT {
+) : ITask {
     companion object {
         private const val CHALLENGE = "visual_basic_math"
         private val pythonBinary = File("scripts/venv/bin/python3").absolutePath

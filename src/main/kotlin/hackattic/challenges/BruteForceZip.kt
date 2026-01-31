@@ -13,7 +13,7 @@ data class ZipUrl(
 
 class BruteForceZip (
     val hackattic: HackatticClient,
-): TaskIT {
+): ITask {
 
     companion object {
         private const val CHALLENGE = "brute_force_zip"
