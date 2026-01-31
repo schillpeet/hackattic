@@ -5,7 +5,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.Base64
 
-private data class Solution(
+private data class HelpMeUnpackSolution(
     val int: Int,
     val uint: UInt,
     val short: Short,
@@ -45,7 +45,7 @@ class HelpMeUnpack(
             ?: error("Response doesn't contain bytes: '$base64Res'")
     }
 
-    private fun getUnpackedBytes(base64Input: String): Solution {
+    private fun getUnpackedBytes(base64Input: String): HelpMeUnpackSolution {
         val encodedStr = Base64.getDecoder().decode(base64Input)
         //println(encodedStr.joinToString(" ") { "%02x".format(it) })
 
@@ -86,18 +86,18 @@ class HelpMeUnpack(
             .order(ByteOrder.BIG_ENDIAN)
             .double
 
-        return Solution(resultInt, resultUInt, resultShort, resultFloat, resultDouble, resultDoubleBigEndian)
+        return HelpMeUnpackSolution(resultInt, resultUInt, resultShort, resultFloat, resultDouble, resultDoubleBigEndian)
     }
 
-    private fun postSolution(solution: Solution, playground: Boolean) {
+    private fun postSolution(helpMeUnpackSolution: HelpMeUnpackSolution, playground: Boolean) {
         val output = """
             {
-            "int": ${solution.int},
-            "uint": ${solution.uint},
-            "short": ${solution.short},
-            "float": ${solution.float},
-            "double": ${solution.double},
-            "big_endian_double": ${solution.doubleBe}
+            "int": ${helpMeUnpackSolution.int},
+            "uint": ${helpMeUnpackSolution.uint},
+            "short": ${helpMeUnpackSolution.short},
+            "float": ${helpMeUnpackSolution.float},
+            "double": ${helpMeUnpackSolution.double},
+            "big_endian_double": ${helpMeUnpackSolution.doubleBe}
             }
         """.trimIndent()
 

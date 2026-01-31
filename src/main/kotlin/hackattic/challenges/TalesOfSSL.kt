@@ -24,7 +24,7 @@ import java.security.spec.RSAPublicKeySpec
 import java.util.*
 
 
-data class CertificateResponse(
+data class TalesOfSSLProblem(
     @field:JsonProperty("private_key") val privateKeyBase64: String,
     @field:JsonProperty("required_data") val requiredData: RequiredData
 )
@@ -79,7 +79,7 @@ class TalesOfSSL (
         private const val CHALLENGE = "tales_of_ssl"
     }
 
-    fun generateSelfSignedCertificate(certRes: CertificateResponse): String {
+    fun generateSelfSignedCertificate(certRes: TalesOfSSLProblem): String {
         val utilsOfTales = UtilsOfTales()
         val privateKey: PrivateKey = utilsOfTales.getRSAPrivateKeyFromBase64(certRes.privateKeyBase64)
         val publicKey: PublicKey = utilsOfTales.generatePublicKeyFromPrivateKey(privateKey)
@@ -131,7 +131,7 @@ class TalesOfSSL (
     override fun run(playground: Boolean) {
         val getProblem = hackattic.getProblem(CHALLENGE)
         val mapper = jacksonObjectMapper()
-        val certRes = mapper.readValue(getProblem, CertificateResponse::class.java)
+        val certRes = mapper.readValue(getProblem, TalesOfSSLProblem::class.java)
         val selfSignedCertificateBase64 = generateSelfSignedCertificate(certRes)
         val solution = mapper.writeValueAsString(mapOf("certificate" to selfSignedCertificateBase64))
         postSolution(solution, playground)

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import hackattic.HackatticClient
 import tools.jackson.module.kotlin.jacksonObjectMapper
 
-data class PresenceToken(
+data class AGlobalPresenceProblem(
     @field:JsonProperty("presence_token") val token: String,
 )
 
@@ -38,7 +38,7 @@ class AGlobalPresence(
     override fun run(playground: Boolean) {
         val getProblem = javaClient.getProblem(CHALLENGE)
         val jacksonMapper = jacksonObjectMapper()
-        val presence = jacksonMapper.readValue(getProblem, PresenceToken::class.java)
+        val presence = jacksonMapper.readValue(getProblem, AGlobalPresenceProblem::class.java)
         val visitedAll = visitTheWorld(presence.token)
 
         if (visitedAll) {

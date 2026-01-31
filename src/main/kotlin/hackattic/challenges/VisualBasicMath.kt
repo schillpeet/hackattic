@@ -10,8 +10,8 @@ import java.math.BigInteger
 import java.net.URL
 
 
-data class ImageUrl(@field:JsonProperty("image_url") val imageUrl: String)
-data class Result(@field:JsonProperty("result") val result: String)
+data class VisualBasicMathProblem(@field:JsonProperty("image_url") val imageUrl: String)
+data class VisualBasicMathSolution(@field:JsonProperty("result") val result: String)
 data class OcrResult(
     val sign: String,
     val numbers: String
@@ -44,7 +44,7 @@ class VisualBasicMath(
         val mapper = jacksonObjectMapper()
         val problem = hackatticClient.getProblem(CHALLENGE)
             .also { println("image url: $it") }
-        val urlObj = mapper.readValue(problem, ImageUrl::class.java)
+        val urlObj = mapper.readValue(problem, VisualBasicMathProblem::class.java)
 
         val imageBytes: ByteArray = hackatticClient.getProblemFromDynamicUrl(urlObj.imageUrl)
 
@@ -76,7 +76,7 @@ class VisualBasicMath(
         val result = calculate(signsAndNumbers)
 
         val response = hackatticClient.submitSolution(
-            CHALLENGE, jacksonObjectMapper().writeValueAsString(Result(result)), playground)
+            CHALLENGE, jacksonObjectMapper().writeValueAsString(VisualBasicMathSolution(result)), playground)
         println("Server Response: $response")
     }
 

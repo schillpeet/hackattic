@@ -7,7 +7,7 @@ import tools.jackson.module.kotlin.jacksonObjectMapper
 import java.io.File
 import java.nio.file.Files
 
-data class ZipUrl(
+data class BruteForceProblem(
     @field:JsonProperty("zip_url") val url: String,
 )
 
@@ -83,7 +83,7 @@ class BruteForceZip (
 
     private fun getZip(mapper: ObjectMapper): ByteArray {
         val oneTimeUrl = hackattic.getProblem(CHALLENGE)
-        val url = mapper.readValue(oneTimeUrl, ZipUrl::class.java).url
+        val url = mapper.readValue(oneTimeUrl, BruteForceProblem::class.java).url
             .also { println("one-time-url: $it") }
         val zip = hackattic.getProblemFromDynamicUrl<ByteArray>(url) // Call-Site
         return zip

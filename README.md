@@ -47,6 +47,7 @@ I have written down my thoughts/insights on the challenges in the docs about the
 - A global presence ✅
 - Visual basic math ✅
 - Backup restore ✅
+- Mini miner ✅
 
 ## Solved Secrets
 

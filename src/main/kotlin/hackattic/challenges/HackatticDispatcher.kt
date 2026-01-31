@@ -94,8 +94,14 @@ class HackatticDispatcher {
                 val hackatticClient = getJavaHttpClient(token)
                 BackupRestore(Challenge.BackupRestore.toString().toSnakeCase(), hackatticClient).run(playground)
             }
+
+            Challenge.MiniMiner -> {
+                val hackatticClient = getJavaHttpClient(token)
+                MiniMiner(Challenge.MiniMiner.toString().toSnakeCase(), hackatticClient).run(playground)
+            }
         }
     }
+
     // TODO: refactor this -> add this to your enum class
     private fun String.toSnakeCase() = replace(Regex("(?<=.)([A-Z])"), "_$1").lowercase()
 
