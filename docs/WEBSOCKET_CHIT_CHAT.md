@@ -1,4 +1,4 @@
-# WebSocket chit hat
+# WebSocket chit chat
 
 Example:
 

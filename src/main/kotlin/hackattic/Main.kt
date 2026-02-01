@@ -1,5 +1,5 @@
 package hackattic
 
 fun main() {
-    HackatticDispatcher().run(Challenge.WebsocketChitChat)
+    HackatticDispatcher().run(Challenge.ReadingQr)
 }

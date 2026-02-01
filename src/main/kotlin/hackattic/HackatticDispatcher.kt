@@ -5,6 +5,7 @@ import hackattic.challenges.BackupRestore
 import hackattic.challenges.BruteForceZip
 import hackattic.challenges.HelpMeUnpack
 import hackattic.challenges.MiniMiner
+import hackattic.challenges.ReadingQR
 import hackattic.challenges.TalesOfSSL
 import hackattic.challenges.VisualBasicMath
 import hackattic.challenges.WebSocketChitChat
@@ -121,6 +122,12 @@ class HackatticDispatcher {
                     okHttpHackatticClient,
                     javaHackatticClient
                 ).run(playground)
+            }
+
+            Challenge.ReadingQr -> {
+                val hackatticClient = getJavaHttpClient(token)
+                val challengeName = Challenge.ReadingQr.toString().toSnakeCase()
+                ReadingQR(challengeName,hackatticClient).run(playground)
             }
         }
     }

@@ -37,6 +37,10 @@ dependencies {
 
     // Cosmetic implementation to make the slf4j error message disappear.
     implementation("org.slf4j:slf4j-simple:2.0.9")
+
+    // reading QR
+    implementation("com.google.zxing:javase:3.5.4")
+    implementation("com.google.zxing:core:3.5.4")
 }
 tasks.test {
     useJUnitPlatform()
