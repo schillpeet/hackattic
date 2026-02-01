@@ -48,6 +48,7 @@ I have written down my thoughts/insights on the challenges in the docs about the
 - Visual basic math ✅
 - Backup restore ✅
 - Mini miner ✅
+- WebSocket chit chat ✅
 
 ## Solved Secrets
 

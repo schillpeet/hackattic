@@ -1,11 +1,17 @@
-package hackattic.challenges
+package hackattic
 
-import hackattic.Challenge
-import hackattic.HackatticClient
-import hackattic.Secret
-import hackattic.Task
+import hackattic.challenges.AGlobalPresence
+import hackattic.challenges.BackupRestore
+import hackattic.challenges.BruteForceZip
+import hackattic.challenges.HelpMeUnpack
+import hackattic.challenges.MiniMiner
+import hackattic.challenges.TalesOfSSL
+import hackattic.challenges.VisualBasicMath
+import hackattic.challenges.WebSocketChitChat
 import hackattic.secrets.Secret00
 import hackattic.secrets.Secret01
+import hackattic.utils.TokenProvider
+import hackattic.utils.TokenStore
 import io.github.cdimascio.dotenv.dotenv
 import okhttp3.OkHttpClient
 import org.bouncycastle.jce.provider.BouncyCastleProvider
@@ -43,6 +49,11 @@ class HackatticDispatcher {
             .build()
 
         return HackatticClient(null, okClient, token)
+    }
+
+    private fun getOkHttpClient(token: String): HackatticClient {
+        val client = OkHttpClient.Builder().build()
+        return HackatticClient(null, client, token)
     }
 
     private fun getJavaHttpClient(token: String): HackatticClient {
@@ -99,10 +110,23 @@ class HackatticDispatcher {
                 val hackatticClient = getJavaHttpClient(token)
                 MiniMiner(Challenge.MiniMiner.toString().toSnakeCase(), hackatticClient).run(playground)
             }
+
+            Challenge.WebsocketChitChat -> {
+                val okHttpHackatticClient = getOkHttpClient(token)
+                val javaHackatticClient = getJavaHttpClient(token)
+
+                val challengeName = Challenge.WebsocketChitChat.toString().toSnakeCase()
+                WebSocketChitChat(
+                    challengeName,
+                    okHttpHackatticClient,
+                    javaHackatticClient
+                ).run(playground)
+            }
         }
     }
 
     // TODO: refactor this -> add this to your enum class
+    //  and 2: add toSnakeCase as challenge name to the other calls
     private fun String.toSnakeCase() = replace(Regex("(?<=.)([A-Z])"), "_$1").lowercase()
 
     private fun runSecret(secretName: Secret) {

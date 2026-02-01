@@ -32,3 +32,6 @@ tor-challenge/tor.log
 
 ### Python
 scripts/venv/
+
+### place for tokens
+.cache/*

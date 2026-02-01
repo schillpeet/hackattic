@@ -46,7 +46,7 @@ class VisualBasicMath(
             .also { println("image url: $it") }
         val urlObj = mapper.readValue(problem, VisualBasicMathProblem::class.java)
 
-        val imageBytes: ByteArray = hackatticClient.getProblemFromDynamicUrl(urlObj.imageUrl)
+        val imageBytes = hackatticClient.getProblemFromDynamicUrl<ByteArray>(urlObj.imageUrl)
 
         val debugDir = File("challenge_work/visual_basic_math_data")
         debugDir.mkdirs()
