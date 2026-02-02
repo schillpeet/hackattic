@@ -35,3 +35,6 @@ scripts/venv/
 
 ### place for tokens
 .cache/*
+
+### own
+.NOTES.md

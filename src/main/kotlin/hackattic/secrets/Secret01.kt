@@ -47,20 +47,7 @@ class Secret01: ITask {
         }.joinToString("")
     }
 
-    /**
-     * Decryption approach:
-     *
-     * The text was decrypted by applying a progressive Caesar cipher with
-     * different base shifts. For each tested base value, one meaningful
-     * plaintext word appeared at a consistent position in the output.
-     *
-     * Final result:
-     * well, well, well! impressive puzzle-solving skills. congratulations! the solution is "harry-jacob".
-     *
-     * Combining the meaningful results yields the final solution isn't the final solution 😂:
-     * "harry-jacob".
-     * the final solution is: Capital matters
-     */
+    // what's the solution??? Take a look in .NOTES ;-)
     override fun run(playground: Boolean) {
         println(progressiveCaesar())
     }
