@@ -3,6 +3,7 @@ package hackattic
 import hackattic.challenges.AGlobalPresence
 import hackattic.challenges.BackupRestore
 import hackattic.challenges.BruteForceZip
+import hackattic.challenges.CollisionCourse
 import hackattic.challenges.HelpMeUnpack
 import hackattic.challenges.MiniMiner
 import hackattic.challenges.ReadingQR
@@ -133,6 +134,12 @@ class HackatticDispatcher {
                 val javaHackatticClient = getJavaHttpClient(token)
                 val challengeName = Challenge.TouchToneDialing.toString().toSnakeCase()
                 TouchToneDialing(challengeName, javaHackatticClient).run(playground)
+            }
+
+            Challenge.CollisionCourse -> {
+                val hackatticClient = getJavaHttpClient(token)
+                val challengeName = Challenge.CollisionCourse.toString().toSnakeCase()
+                CollisionCourse(challengeName, hackatticClient).run(playground)
             }
         }
     }

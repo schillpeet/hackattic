@@ -1,5 +1,5 @@
 package hackattic
 
 fun main() {
-    HackatticDispatcher().run(Challenge.TouchToneDialing)
+    HackatticDispatcher().run(Challenge.CollisionCourse, true)
 }
