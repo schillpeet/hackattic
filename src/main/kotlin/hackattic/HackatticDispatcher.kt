@@ -7,12 +7,11 @@ import hackattic.challenges.HelpMeUnpack
 import hackattic.challenges.MiniMiner
 import hackattic.challenges.ReadingQR
 import hackattic.challenges.TalesOfSSL
+import hackattic.challenges.TouchToneDialing
 import hackattic.challenges.VisualBasicMath
 import hackattic.challenges.WebSocketChitChat
 import hackattic.secrets.Secret00
 import hackattic.secrets.Secret01
-import hackattic.utils.TokenProvider
-import hackattic.utils.TokenStore
 import io.github.cdimascio.dotenv.dotenv
 import okhttp3.OkHttpClient
 import org.bouncycastle.jce.provider.BouncyCastleProvider
@@ -127,7 +126,13 @@ class HackatticDispatcher {
             Challenge.ReadingQr -> {
                 val hackatticClient = getJavaHttpClient(token)
                 val challengeName = Challenge.ReadingQr.toString().toSnakeCase()
-                ReadingQR(challengeName,hackatticClient).run(playground)
+                ReadingQR(challengeName, hackatticClient).run(playground)
+            }
+
+            Challenge.TouchToneDialing -> {
+                val javaHackatticClient = getJavaHttpClient(token)
+                val challengeName = Challenge.TouchToneDialing.toString().toSnakeCase()
+                TouchToneDialing(challengeName, javaHackatticClient).run(playground)
             }
         }
     }

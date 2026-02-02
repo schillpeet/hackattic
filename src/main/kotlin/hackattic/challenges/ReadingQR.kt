@@ -26,7 +26,7 @@ class ReadingQR(
 ): ITask {
 
     private fun readingQr(filename: String): String? {
-        val file = File("/Users/petschi/code/hackattic/challenge_work/reading_qr/$filename")
+        val file = File("/challenge_work/reading_qr/$filename")
         val bufferedImage = ImageIO.read(file)
         val source = BufferedImageLuminanceSource(bufferedImage)
         val binaryBitmap = BinaryBitmap(HybridBinarizer(source))

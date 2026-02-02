@@ -1,5 +1,5 @@
 package hackattic
 
 fun main() {
-    HackatticDispatcher().run(Challenge.ReadingQr)
+    HackatticDispatcher().run(Challenge.TouchToneDialing)
 }
