@@ -2,6 +2,7 @@ package hackattic
 
 import hackattic.challenges.AGlobalPresence
 import hackattic.challenges.BackupRestore
+import hackattic.challenges.BasicFaceDetection
 import hackattic.challenges.BruteForceZip
 import hackattic.challenges.CollisionCourse
 import hackattic.challenges.HelpMeUnpack
@@ -140,6 +141,12 @@ class HackatticDispatcher {
                 val hackatticClient = getJavaHttpClient(token)
                 val challengeName = Challenge.CollisionCourse.toString().toSnakeCase()
                 CollisionCourse(challengeName, hackatticClient).run(playground)
+            }
+
+            Challenge.BasicFaceDetection -> {
+                val javaClient = getJavaHttpClient(token)
+                val challengeName = Challenge.BasicFaceDetection.toString().toSnakeCase()
+                BasicFaceDetection(javaClient, challengeName).run(playground)
             }
         }
     }

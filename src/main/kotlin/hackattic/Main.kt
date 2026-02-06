@@ -1,5 +1,5 @@
 package hackattic
 
 fun main() {
-    HackatticDispatcher().run(Challenge.CollisionCourse, true)
+    HackatticDispatcher().run(Challenge.BasicFaceDetection, false)
 }

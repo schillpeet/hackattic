@@ -32,7 +32,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.3.2")
 
     // OCR - for analyzing images
-    implementation("net.sourceforge.tess4j:tess4j:5.18.0")
+    //implementation("net.sourceforge.tess4j:tess4j:5.18.0")
     implementation("org.openpnp:opencv:4.9.0-0")
 
     // Cosmetic implementation to make the slf4j error message disappear.
@@ -41,6 +41,11 @@ dependencies {
     // reading QR
     implementation("com.google.zxing:javase:3.5.4")
     implementation("com.google.zxing:core:3.5.4")
+
+    // face detection
+    implementation("ai.djl:api:0.36.0")
+    implementation("ai.djl.tensorflow:tensorflow-engine:0.36.0")
+    implementation("ai.djl.tensorflow:tensorflow-model-zoo:0.36.0")
 }
 tasks.test {
     useJUnitPlatform()
