@@ -6,6 +6,7 @@ import hackattic.challenges.BasicFaceDetection
 import hackattic.challenges.BruteForceZip
 import hackattic.challenges.CollisionCourse
 import hackattic.challenges.HelpMeUnpack
+import hackattic.challenges.JottingJWTs
 import hackattic.challenges.MiniMiner
 import hackattic.challenges.ReadingQR
 import hackattic.challenges.TalesOfSSL
@@ -147,6 +148,20 @@ class HackatticDispatcher {
                 val javaClient = getJavaHttpClient(token)
                 val challengeName = Challenge.BasicFaceDetection.toString().toSnakeCase()
                 BasicFaceDetection(javaClient, challengeName).run(playground)
+            }
+
+            Challenge.JottingJwts -> {
+                val hackatticClient = getJavaHttpClient(token)
+                val challengeName = Challenge.JottingJwts.toString().toSnakeCase()
+
+                val server = HackatticServer()
+                server.start()
+
+                try {
+                    JottingJWTs(hackatticClient, challengeName).run(playground)
+                } finally {
+                    server.stop()
+                }
             }
         }
     }

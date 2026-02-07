@@ -1,7 +1,12 @@
 plugins {
-    kotlin("jvm") version "2.1.0"
+    kotlin("jvm") version "2.3.0"
     application
 }
+
+val bouncyCastleVersion = "1.83"
+val zxingVersion = "3.5.4"
+val djlVersion = "0.36.0"
+val ktorVersion = "3.4.0"
 
 repositories {
     mavenCentral()
@@ -13,9 +18,9 @@ dependencies {
     implementation("tools.jackson.module:jackson-module-kotlin:3.0.3")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
 
-    // crypto
-    implementation("org.bouncycastle:bcpkix-jdk15to18:1.83")
-    implementation("org.bouncycastle:bcprov-jdk15to18:1.83")
+    // crypto/SSL
+    implementation("org.bouncycastle:bcpkix-jdk15to18:$bouncyCastleVersion")
+    implementation("org.bouncycastle:bcprov-jdk15to18:$bouncyCastleVersion")
 
     // testing
     testImplementation(kotlin("test"))
@@ -39,14 +44,21 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.9")
 
     // reading QR
-    implementation("com.google.zxing:javase:3.5.4")
-    implementation("com.google.zxing:core:3.5.4")
+    implementation("com.google.zxing:javase:$zxingVersion")
+    implementation("com.google.zxing:core:$zxingVersion")
 
     // face detection
-    implementation("ai.djl:api:0.36.0")
-    implementation("ai.djl.tensorflow:tensorflow-engine:0.36.0")
-    implementation("ai.djl.tensorflow:tensorflow-model-zoo:0.36.0")
+    implementation("ai.djl:api:$djlVersion")
+    implementation("ai.djl.tensorflow:tensorflow-engine:$djlVersion")
+    implementation("ai.djl.tensorflow:tensorflow-model-zoo:$djlVersion")
+
+    // we need our own server that Hackattic can contact.
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    implementation("io.ktor:ktor-server-cors:$ktorVersion")
+    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
 }
+
 tasks.test {
     useJUnitPlatform()
 }

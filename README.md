@@ -52,6 +52,12 @@ I have written down my thoughts/insights on the challenges in the docs about the
 - Reading QR ✅
 - Touch-Tone dialing ✅
 - Collision course ✅
+- Basic face detection ✅
+
+The following challenges require running your own server. See `docs/SERVER_SETUP.md` for details.
+
+- Jotting JWTs
+- ...
 
 ## Solved Secrets (all 😎)
 
