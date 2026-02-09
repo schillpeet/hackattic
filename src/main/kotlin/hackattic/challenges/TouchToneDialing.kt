@@ -15,16 +15,16 @@ data class TouchToneDialingSolution(
 
 class TouchToneDialing (
     val challengeName: String,
-    val javaHackatticClient: HackatticClient,
+    val hackatticClient: HackatticClient,
 ): ITask {
 
     override fun run(playground: Boolean) {
         val mapper = jacksonObjectMapper()
-        val problem = javaHackatticClient.getProblem(challengeName)
+        val problem = hackatticClient.getProblem(challengeName)
         val oneTimeUrl = mapper.readValue(problem, TouchToneDialingProblem::class.java).wavUrl
             .also { println("oneTimeUrl: $it") }
 
-        val wavBytes = javaHackatticClient.getProblemFromDynamicUrl<ByteArray>(oneTimeUrl)
+        val wavBytes = hackatticClient.getProblemFromDynamicUrl<ByteArray>(oneTimeUrl)
 
         val filename = "$challengeName.wav"
         val outputDir = Paths.get("challenge_work", "touch_tone_dialog")
@@ -60,7 +60,7 @@ class TouchToneDialing (
         println("result: $cleanDTMFs")
 
         val solutionJson = mapper.writeValueAsString(TouchToneDialingSolution(cleanDTMFs))
-        javaHackatticClient.submitSolution(
+        hackatticClient.submitSolution(
             challengeName,
             solutionJson,
             playground,

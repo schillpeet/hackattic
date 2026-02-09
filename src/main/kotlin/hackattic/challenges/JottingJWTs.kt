@@ -24,8 +24,8 @@ data class JottingJWTsSolution(
 )
 
 class JottingJWTs(
-    private val hackatticClient: HackatticClient,
     private val challengeName: String,
+    private val hackatticClient: HackatticClient,
     private val ownAppUrl: String
 ): ITask {
     private var jwtSecret: String? = null

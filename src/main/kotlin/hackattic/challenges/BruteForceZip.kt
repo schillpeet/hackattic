@@ -12,11 +12,11 @@ data class BruteForceProblem(
 )
 
 class BruteForceZip (
-    val hackattic: HackatticClient,
+    private val challengeName: String,
+    private val hackatticClient: HackatticClient
 ): ITask {
 
     companion object {
-        private const val CHALLENGE = "brute_force_zip"
         private const val ZIP2JOHN_PATH = "/opt/homebrew/opt/john-jumbo/share/john/zip2john"
     }
 
@@ -82,15 +82,15 @@ class BruteForceZip (
     }
 
     private fun getZip(mapper: ObjectMapper): ByteArray {
-        val oneTimeUrl = hackattic.getProblem(CHALLENGE)
+        val oneTimeUrl = hackatticClient.getProblem(challengeName)
         val url = mapper.readValue(oneTimeUrl, BruteForceProblem::class.java).url
             .also { println("one-time-url: $it") }
-        val zip = hackattic.getProblemFromDynamicUrl<ByteArray>(url) // Call-Site
+        val zip = hackatticClient.getProblemFromDynamicUrl<ByteArray>(url) // Call-Site
         return zip
     }
 
     private fun postSolution(solution: String, playground: Boolean) {
-        val response = hackattic.submitSolution(CHALLENGE, solution, playground)
+        val response = hackatticClient.submitSolution(challengeName, solution, playground)
         println("response body:\n${response}")
     }
 

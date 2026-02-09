@@ -31,14 +31,12 @@ private data class HelpMeUnpackSolution(
  * - All values are little endian **except** `bigEndianDouble`
  */
 class HelpMeUnpack(
-    val hackattic: HackatticClient
+    private val challengeName: String,
+    private val hackatticClient: HackatticClient
 ): ITask {
-    companion object {
-        private const val CHALLENGE = "help_me_unpack"
-    }
 
     private fun getBase64Input(): String {
-        val base64Res = hackattic.getProblem(CHALLENGE)
+        val base64Res = hackatticClient.getProblem(challengeName)
         val regex = Regex(""""bytes"\s*:\s*"([^"]+)"""")
         return regex
             .find(base64Res)?.groupValues?.get(1)
@@ -101,7 +99,7 @@ class HelpMeUnpack(
             }
         """.trimIndent()
 
-        val response = hackattic.submitSolution(CHALLENGE, output, playground)
+        val response = hackatticClient.submitSolution(challengeName, output, playground)
 
         println("response body:\n${response}")
     }

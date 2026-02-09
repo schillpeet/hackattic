@@ -9,12 +9,11 @@ data class AGlobalPresenceProblem(
 )
 
 class AGlobalPresence(
-    private val javaClient: HackatticClient,
+    private val challengeName: String,
+    private val hackatticClient: HackatticClient,
     private val clientsByCountry: Map<String, HackatticClient>
 ) : ITask {
-    companion object {
-        private const val CHALLENGE = "a_global_presence"
-    }
+
     private fun visitTheWorld(presenceToken: String): Boolean {
         val totalVisited = mutableSetOf<String>()
         val startTime = System.currentTimeMillis()
@@ -36,13 +35,13 @@ class AGlobalPresence(
     }
 
     override fun run(playground: Boolean) {
-        val getProblem = javaClient.getProblem(CHALLENGE)
+        val getProblem = hackatticClient.getProblem(challengeName)
         val jacksonMapper = jacksonObjectMapper()
         val presence = jacksonMapper.readValue(getProblem, AGlobalPresenceProblem::class.java)
         val visitedAll = visitTheWorld(presence.token)
 
         if (visitedAll) {
-            val response = javaClient.submitSolution(CHALLENGE, "{}", playground)
+            val response = hackatticClient.submitSolution(challengeName, "{}", playground)
             println("response body:\n${response}")
         } else println("Does not visit all countries")
     }

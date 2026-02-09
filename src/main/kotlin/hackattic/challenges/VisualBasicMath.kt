@@ -18,10 +18,10 @@ data class OcrResult(
 )
 
 class VisualBasicMath(
+    private val challengeName: String,
     private val hackatticClient: HackatticClient
 ) : ITask {
     companion object {
-        private const val CHALLENGE = "visual_basic_math"
         private val pythonBinary = File("scripts/venv/bin/python3").absolutePath
         private val ocrScript = File("scripts/ocr_helper.py").absolutePath
     }
@@ -42,7 +42,7 @@ class VisualBasicMath(
 
     private fun fetchAndSubmitSolution(playground: Boolean) {
         val mapper = jacksonObjectMapper()
-        val problem = hackatticClient.getProblem(CHALLENGE)
+        val problem = hackatticClient.getProblem(challengeName)
             .also { println("image url: $it") }
         val urlObj = mapper.readValue(problem, VisualBasicMathProblem::class.java)
 
@@ -76,7 +76,7 @@ class VisualBasicMath(
         val result = calculate(signsAndNumbers)
 
         val response = hackatticClient.submitSolution(
-            CHALLENGE, jacksonObjectMapper().writeValueAsString(VisualBasicMathSolution(result)), playground)
+            challengeName, jacksonObjectMapper().writeValueAsString(VisualBasicMathSolution(result)), playground)
         println("Server Response: $response")
     }
 

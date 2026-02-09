@@ -49,8 +49,8 @@ object FaceModel {
 }
 
 class BasicFaceDetection(
-    val javaClient: HackatticClient,
-    val challengeName: String,
+    private val challengeName: String,
+    private val hackatticClient: HackatticClient,
 ): ITask {
     companion object {
         private const val BASE_PATH = "challenge_work/basic_face_detection/basic_face_detection.jpg"
@@ -114,14 +114,14 @@ class BasicFaceDetection(
 
         // get one time url
         val mapper = jacksonObjectMapper()
-        val getProblem = javaClient.getProblem(challengeName)
+        val getProblem = hackatticClient.getProblem(challengeName)
         val oneTimeUrl = mapper.readValue(
             getProblem,
             BasicFaceDetectionProblem::class.java
         ).imageUrl.also { println("image url: $it") }
 
         // save images to tmp folder challenge_work
-        val facesImage = javaClient.getProblemFromDynamicUrl<ByteArray>(oneTimeUrl)
+        val facesImage = hackatticClient.getProblemFromDynamicUrl<ByteArray>(oneTimeUrl)
         val fileName = "$challengeName.jpg"
         val outputDir = Paths.get("challenge_work", challengeName)
         val outputFile = outputDir.resolve(fileName)
@@ -130,7 +130,7 @@ class BasicFaceDetection(
 
         val faces = countFaces()//.also { println("faces: $it") }
         val solution = mapper.writeValueAsString(BasicFaceDetectionSolution(faces))
-        javaClient.submitSolution(challengeName, solution, playground)
+        hackatticClient.submitSolution(challengeName, solution, playground)
 
         shutdown()
     }

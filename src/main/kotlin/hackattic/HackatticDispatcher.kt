@@ -66,7 +66,7 @@ class HackatticDispatcher {
 
 
     // TODO refactor this if you have more than 8 calls. User an 'enum with Factory Lambda'
-    //  or with sealed class?
+    //  or Factory Methods?
     private fun runChallenge(name: Challenge, playground: Boolean)  {
         val token: String = dotenv()["HACKATTIC_TOKEN"] ?: error("HACKATTIC_TOKEN not set")
         val myAppUrl: String = dotenv()["OWN_APP_URL"] ?: error("OWN_APP_URL not set")
@@ -74,17 +74,17 @@ class HackatticDispatcher {
         when (name) {
             Challenge.HelpMeUnpack -> {
                 val hackatticClient = getJavaHttpClient(token)
-                HelpMeUnpack(hackatticClient).run(playground)
+                HelpMeUnpack(Challenge.HelpMeUnpack.snakeCaseName, hackatticClient).run(playground)
             }
             Challenge.BruteForceZip -> {
                 val hackatticClient = getJavaHttpClient(token)
-                BruteForceZip(hackatticClient).run(playground)
+                BruteForceZip(Challenge.BruteForceZip.snakeCaseName, hackatticClient).run(playground)
             }
             Challenge.TalesOfSSL -> {
                 // just for table_of_ssl: this only needs to happen once when the app is started.
                 Security.addProvider(BouncyCastleProvider())
                 val hackatticClient = getJavaHttpClient(token)
-                TalesOfSSL(hackatticClient).run(playground)
+                TalesOfSSL(Challenge.TalesOfSSL.snakeCaseName, hackatticClient).run(playground)
             }
 
             Challenge.AGlobalPresence -> {
@@ -98,71 +98,65 @@ class HackatticDispatcher {
                     "FR" to getTorOkHttpClient(token, Countries.FR),
                     "NL" to getTorOkHttpClient(token, Countries.NL),
                 )
-                AGlobalPresence(hackatticClient, clients).run(playground)
+                AGlobalPresence(
+                    Challenge.AGlobalPresence.snakeCaseName,
+                    hackatticClient,
+                    clients
+                ).run(playground)
             }
 
             Challenge.VisualBasicMath -> {
                 val hackatticClient = getJavaHttpClient(token)
-                VisualBasicMath(hackatticClient).run(playground)
+                VisualBasicMath(Challenge.VisualBasicMath.snakeCaseName, hackatticClient).run(playground)
             }
 
             Challenge.BackupRestore -> {
                 val hackatticClient = getJavaHttpClient(token)
-                BackupRestore(Challenge.BackupRestore.toString().toSnakeCase(), hackatticClient).run(playground)
+                BackupRestore(Challenge.BackupRestore.snakeCaseName, hackatticClient).run(playground)
             }
 
             Challenge.MiniMiner -> {
                 val hackatticClient = getJavaHttpClient(token)
-                MiniMiner(Challenge.MiniMiner.toString().toSnakeCase(), hackatticClient).run(playground)
+                MiniMiner(Challenge.MiniMiner.snakeCaseName, hackatticClient).run(playground)
             }
 
             Challenge.WebsocketChitChat -> {
                 val okHttpHackatticClient = getOkHttpClient(token)
                 val javaHackatticClient = getJavaHttpClient(token)
 
-                val challengeName = Challenge.WebsocketChitChat.toString().toSnakeCase()
                 WebSocketChitChat(
-                    challengeName,
-                    okHttpHackatticClient,
-                    javaHackatticClient
+                    Challenge.WebsocketChitChat.snakeCaseName,
+                    javaHackatticClient,
+                    okHttpHackatticClient
                 ).run(playground)
             }
 
             Challenge.ReadingQr -> {
                 val hackatticClient = getJavaHttpClient(token)
-                val challengeName = Challenge.ReadingQr.toString().toSnakeCase()
-                ReadingQR(challengeName, hackatticClient).run(playground)
+                ReadingQR(Challenge.ReadingQr.snakeCaseName, hackatticClient).run(playground)
             }
 
             Challenge.TouchToneDialing -> {
                 val javaHackatticClient = getJavaHttpClient(token)
-                val challengeName = Challenge.TouchToneDialing.toString().toSnakeCase()
-                TouchToneDialing(challengeName, javaHackatticClient).run(playground)
+                TouchToneDialing(Challenge.TouchToneDialing.snakeCaseName, javaHackatticClient).run(playground)
             }
 
             Challenge.CollisionCourse -> {
                 val hackatticClient = getJavaHttpClient(token)
-                val challengeName = Challenge.CollisionCourse.toString().toSnakeCase()
-                CollisionCourse(challengeName, hackatticClient).run(playground)
+                CollisionCourse(Challenge.CollisionCourse.snakeCaseName, hackatticClient).run(playground)
             }
 
             Challenge.BasicFaceDetection -> {
                 val javaClient = getJavaHttpClient(token)
-                val challengeName = Challenge.BasicFaceDetection.toString().toSnakeCase()
-                BasicFaceDetection(javaClient, challengeName).run(playground)
+                BasicFaceDetection(Challenge.BasicFaceDetection.snakeCaseName, javaClient).run(playground)
             }
 
             Challenge.JottingJwts -> {
                 val hackatticClient = getJavaHttpClient(token)
-                val challengeName = Challenge.JottingJwts.toString().toSnakeCase()
-                JottingJWTs(hackatticClient, challengeName, myAppUrl).run(playground)
+                JottingJWTs(Challenge.JottingJwts.snakeCaseName, hackatticClient, myAppUrl).run(playground)
             }
         }
     }
-
-    // TODO: refactor this -> add this to your enum class
-    //  and 2: add toSnakeCase as challenge name to the other calls
-    private fun String.toSnakeCase() = replace(Regex("(?<=.)([A-Z])"), "_$1").lowercase()
 
     private fun runSecret(secretName: Secret) {
         when (secretName) {

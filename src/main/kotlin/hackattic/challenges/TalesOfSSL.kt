@@ -73,12 +73,9 @@ internal class UtilsOfTales() {
 }
 
 class TalesOfSSL (
-    val hackattic: HackatticClient
+    private val challengeName: String,
+    private val hackatticClient: HackatticClient,
 ): ITask {
-    companion object {
-        private const val CHALLENGE = "tales_of_ssl"
-    }
-
     fun generateSelfSignedCertificate(certRes: TalesOfSSLProblem): String {
         val utilsOfTales = UtilsOfTales()
         val privateKey: PrivateKey = utilsOfTales.getRSAPrivateKeyFromBase64(certRes.privateKeyBase64)
@@ -124,12 +121,12 @@ class TalesOfSSL (
     }
 
     private fun postSolution(solution: String, playground: Boolean) {
-        val response = hackattic.submitSolution(CHALLENGE, solution, playground)
+        val response = hackatticClient.submitSolution(challengeName, solution, playground)
         println("response body:\n${response}")
     }
 
     override fun run(playground: Boolean) {
-        val getProblem = hackattic.getProblem(CHALLENGE)
+        val getProblem = hackatticClient.getProblem(challengeName)
         val mapper = jacksonObjectMapper()
         val certRes = mapper.readValue(getProblem, TalesOfSSLProblem::class.java)
         val selfSignedCertificateBase64 = generateSelfSignedCertificate(certRes)

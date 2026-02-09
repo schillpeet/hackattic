@@ -1,17 +1,20 @@
 package hackattic.challenges
 
 import hackattic.HackatticClient
-import hackattic.utils.TokenResponse
 import tools.jackson.module.kotlin.jacksonObjectMapper
 
 data class WebSocketChitChatSolution(
     val secret: String,
 )
 
+data class TokenResponse(
+    val token: String
+)
+
 class WebSocketChitChat(
     val challengeName: String,
-    val okHttpHackatticClient: HackatticClient,
     val javaClient: HackatticClient,
+    val okHttpHackatticClient: HackatticClient,
 ) : ITask {
 
     override fun run(playground: Boolean) {
