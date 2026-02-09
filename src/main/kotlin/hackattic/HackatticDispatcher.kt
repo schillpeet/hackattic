@@ -66,8 +66,10 @@ class HackatticDispatcher {
 
 
     // TODO refactor this if you have more than 8 calls. User an 'enum with Factory Lambda'
+    //  or with sealed class?
     private fun runChallenge(name: Challenge, playground: Boolean)  {
         val token: String = dotenv()["HACKATTIC_TOKEN"] ?: error("HACKATTIC_TOKEN not set")
+        val myAppUrl: String = dotenv()["OWN_APP_URL"] ?: error("OWN_APP_URL not set")
 
         when (name) {
             Challenge.HelpMeUnpack -> {
@@ -153,15 +155,7 @@ class HackatticDispatcher {
             Challenge.JottingJwts -> {
                 val hackatticClient = getJavaHttpClient(token)
                 val challengeName = Challenge.JottingJwts.toString().toSnakeCase()
-
-                val server = HackatticServer()
-                server.start()
-
-                try {
-                    JottingJWTs(hackatticClient, challengeName).run(playground)
-                } finally {
-                    server.stop()
-                }
+                JottingJWTs(hackatticClient, challengeName, myAppUrl).run(playground)
             }
         }
     }

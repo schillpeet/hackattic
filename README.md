@@ -54,9 +54,10 @@ I have written down my thoughts/insights on the challenges in the docs about the
 - Collision course ✅
 - Basic face detection ✅
 
-The following challenges require running your own server. See `docs/SERVER_SETUP.md` for details.
+The following challenges require running your own reachable server. 
+See `docs/TUNNELING_GENERAL_SERVER_SETUP.md` for details.
 
-- Jotting JWTs
+- Jotting JWTs ✅
 - ...
 
 ## Solved Secrets (all 😎)

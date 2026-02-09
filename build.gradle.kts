@@ -56,7 +56,9 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
-    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+
+    // jwt
+    implementation("com.auth0:java-jwt:4.5.0")
 }
 
 tasks.test {
