@@ -39,7 +39,7 @@ cloudflared tunnel run --url http://localhost:8080 hackattic-tunnel
 Stopping the tunnel with CTRL+C only terminates the running process. The tunnel itself remains 
 registered in Cloudflare and can be reused at any time.
 
-After this, requests to `https://challenge.<my-domain.de>`will be forwarded to my local server 
+After this, requests to `https://challenge.<my-domain>`will be forwarded to my local server 
 running on localhost:8080.
 
 ## Testing

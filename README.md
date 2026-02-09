@@ -4,8 +4,16 @@ Take a look at: https://hackattic.com/
 
 ## Setup
 
+Basic setup:
+
 ```shell
-$ echo <YOUR_HACKATTIC_TOKEN> > .env
+$ echo -e HACKATTIC_TOKEN=<YOUR_HACKATTIC_TOKEN> > .env
+```
+
+If you need your own server:
+
+```shell
+$ echo OWN_APP_URL=<OWN_APP_URL> >> .env
 ```
 
 _INFO: I implemented `dotenv()` to get my token but there are other
