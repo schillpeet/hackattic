@@ -1,5 +1,5 @@
 package hackattic
 
 fun main() {
-    HackatticDispatcher().run(Challenge.MiniMiner, true)
+    HackatticDispatcher().run(Challenge.DockerizedSolutions, false)
 }

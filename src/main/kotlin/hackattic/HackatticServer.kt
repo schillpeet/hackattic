@@ -1,48 +1,39 @@
 package hackattic
 
-import hackattic.challenges.JottingJWTsSolution
-import io.ktor.http.ContentType
 import io.ktor.server.engine.EmbeddedServer
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.server.request.receiveText
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.get
-import io.ktor.server.routing.post
+import io.ktor.server.routing.Route
 import io.ktor.server.routing.routing
+import tools.jackson.databind.ObjectMapper
 import tools.jackson.module.kotlin.jacksonObjectMapper
 
-data class JwtHandler(
-    val shouldContinue: Boolean,
-    val solution: JottingJWTsSolution,
+
+class HackatticContext(
+    val mapper: ObjectMapper,
+    val onCompletion: () -> Unit
 )
 
-class HackatticServer(private val jwtHandler: (String) -> JwtHandler) {
+// Generic Hackattic server with a small DSL to inject challenge-specific routing logic
+class HackatticServer() {
     private var server: EmbeddedServer<*,*>? = null
-    private val objectMapper = jacksonObjectMapper()
+    private val mapper = jacksonObjectMapper()
 
-    fun start(onCompletion: () -> Unit) {
+    /**
+     * Starts a Hackattic challenge server.
+     *
+     * The routing block is executed in a Route scope and receives a HackatticContext
+     * with shared utilities (ObjectMapper, completion hook).
+     */
+    fun start(
+        onCompletion: () -> Unit,
+        block: Route.(HackatticContext) -> Unit
+    ) {
+        val ctx = HackatticContext(mapper, onCompletion)
+
         server = embeddedServer(Netty, 8080, host = "0.0.0.0") {
             routing {
-                get("/health") {
-                    call.respondText("OK")
-                }
-
-                post("/") {
-                    val body = call.receiveText()
-                    val jwt = body.removePrefix("Authorization: Bearer ")
-
-                    val (shouldContinue, solution) = jwtHandler(jwt) // callback
-
-                    if (!shouldContinue) {
-                        call.respondText(
-                            objectMapper.writeValueAsString(solution),
-                            ContentType.Application.Json
-                        )
-                        println("Sent solution, calling onCompletion")
-                        onCompletion()
-                    }
-                }
+                block(ctx)
             }
         }
         server?.start(wait = false)

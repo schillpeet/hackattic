@@ -1,5 +1,7 @@
 package hackattic
 
+import hackattic.challenges.DockerizedSolutions
+import hackattic.challenges.JottingJWTsSolution
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -23,7 +25,8 @@ class HackatticClient(
     }
 
     companion object {
-        private const val HACKATTIC_CHALLENGE_URL = "https://hackattic.com/challenges/"
+        private const val HACKATTIC_URL = "https://hackattic.com/"
+        private const val HACKATTIC_CHALLENGE_URL = "${HACKATTIC_URL}challenges/"
     }
 
     fun webSocketWithOkHttpClient(token: String): String {
@@ -153,6 +156,15 @@ class HackatticClient(
             .build()
 
         return execute(req, bodyHandler())
+    }
+
+    fun triggerEndpoint(url: String, triggerSolution: String): String {
+        val req = HttpRequest.newBuilder()
+            .uri(URI.create("$HACKATTIC_URL$url"))
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(triggerSolution))
+            .build()
+        return execute<String>(req, bodyHandler()).also { println("Triggered endpoint: $url, $it") }
     }
 
     // todo: refactor: Some classes make an extra printout.

@@ -6,10 +6,18 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.annotation.JsonProperty
 import hackattic.HackatticClient
 import hackattic.HackatticServer
-import hackattic.JwtHandler
+import io.ktor.http.ContentType
+import io.ktor.server.request.receiveText
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.post
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.runBlocking
 import tools.jackson.module.kotlin.jacksonObjectMapper
+
+data class JwtHandler(
+    val shouldContinue: Boolean,
+    val solution: JottingJWTsSolution,
+)
 
 data class JottingJWTsAppUrl(
     @field:JsonProperty("app_url") val appUrl: String,
@@ -57,13 +65,29 @@ class JottingJWTs(
         val problem = hackatticClient.getProblem(challengeName)
         jwtSecret = mapper.readValue(problem, JottingJWTsProblem::class.java).secret
 
-        val server = HackatticServer { jwt -> validateAndProcessJWT(jwt)}
 
+        val server = HackatticServer()
         server.start(
             onCompletion = {
                 completionSignal.complete(Unit)
             }
-        )
+        ) { ctx ->
+            post("/") {
+                val body = call.receiveText()
+                val jwt = body.removePrefix("Authorization: Bearer ")
+
+                val (shouldContinue, solution) = validateAndProcessJWT(jwt)
+
+                if (!shouldContinue) {
+                    call.respondText(
+                        mapper.writeValueAsString(solution),
+                        ContentType.Application.Json
+                    )
+                    println("Sent solution, calling onCompletion")
+                    ctx.onCompletion()
+                }
+            }
+        }
 
         // sends my own app url to challenge server
         val appUrl = mapper.writeValueAsString(JottingJWTsAppUrl(ownAppUrl))

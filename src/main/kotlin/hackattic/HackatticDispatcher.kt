@@ -5,6 +5,7 @@ import hackattic.challenges.BackupRestore
 import hackattic.challenges.BasicFaceDetection
 import hackattic.challenges.BruteForceZip
 import hackattic.challenges.CollisionCourse
+import hackattic.challenges.DockerizedSolutions
 import hackattic.challenges.HelpMeUnpack
 import hackattic.challenges.JottingJWTs
 import hackattic.challenges.MiniMiner
@@ -70,6 +71,7 @@ class HackatticDispatcher {
     private fun runChallenge(name: Challenge, playground: Boolean)  {
         val token: String = dotenv()["HACKATTIC_TOKEN"] ?: error("HACKATTIC_TOKEN not set")
         val myAppUrl: String = dotenv()["OWN_APP_URL"] ?: error("OWN_APP_URL not set")
+        val host: String = dotenv()["HOST"] ?: error("HOST not set")
 
         when (name) {
             Challenge.HelpMeUnpack -> {
@@ -154,6 +156,11 @@ class HackatticDispatcher {
             Challenge.JottingJwts -> {
                 val hackatticClient = getJavaHttpClient(token)
                 JottingJWTs(Challenge.JottingJwts.snakeCaseName, hackatticClient, myAppUrl).run(playground)
+            }
+
+            Challenge.DockerizedSolutions -> {
+                val hackatticClient = getJavaHttpClient(token)
+                DockerizedSolutions(Challenge.DockerizedSolutions.snakeCaseName, hackatticClient, host).run(playground)
             }
         }
     }
