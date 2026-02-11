@@ -14,6 +14,7 @@ If you need your own server:
 
 ```shell
 $ echo OWN_APP_URL=<OWN_APP_URL> >> .env
+$ echo HOST=<OWN_HOST> >> .env
 ```
 
 _INFO: I implemented `dotenv()` to get my token but there are other
@@ -25,7 +26,7 @@ Tasks are started via the HackatticDispatcher from main.
 
 There are two kinds of tasks:
 
-- Challenges (Hackattic challenges, require your access token -> see setup)
+- Challenges (Hackattic challenges, require your access token → see setup)
 - Secrets (local secret tasks, no token required)
 
 You select the task by passing the corresponding enum value:
@@ -79,17 +80,17 @@ See `docs/TUNNELING_GENERAL_SERVER_SETUP.md` for details.
 - java solutions are located in: `src/main/java/kata`
 - all other solutions are located in: `kata-others/*`
 
-| Name                     | Java | Python | C++ | Haskell | JavaScript | Ruby | Perl | Elixir | Rust | Go  | PHP |
-| ------------------------ | ---- | ------ | --- | ------- | ---------- | ---- | ---- | ------ | ---- | --- | --- |
-| A Case Of Snake          | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| Almost Binary            | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| Debasing64               | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| It Is Almost Compression | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| Open Parens              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| Sorting JSON Lines       | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| The Sum Of Things        | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| What Day Was It          | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
-| Yes It Fizz              | ✅   | ✅     | ✅  | ✅      | ✅         | ✅   | ✅   | ✅     | ✅   | ✅  | ✅  |
+| Name                     | Java | Python | C++ | Haskell | JavaScript | Ruby | Perl | Elixir | Rust | Go | PHP |
+|--------------------------|------|--------|-----|---------|------------|------|------|--------|------|----|-----|
+| A Case Of Snake          | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| Almost Binary            | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| Debasing64               | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| It Is Almost Compression | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| Open Parens              | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| Sorting JSON Lines       | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| The Sum Of Things        | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| What Day Was It          | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
+| Yes It Fizz              | ✅    | ✅      | ✅   | ✅       | ✅          | ✅    | ✅    | ✅      | ✅    | ✅  | ✅   |
 
 ## Insights
 
@@ -99,3 +100,4 @@ See `docs/TUNNELING_GENERAL_SERVER_SETUP.md` for details.
 - Base64 refers to the 64 distinct characters used for encoding; there are many variations like Base62 (often used for URL shortness) or even Base58 (used in Bitcoin).
 - Haskell: realized once again how beautiful FP is!
 - Traditional PKZIP (zip -e) cracks damn fast (<0.1s) with John the Ripper ✌️ – use 7z+AES256, tar+GPG, or age (perfect for scripts & automation) instead.
+- and many other things 😄
