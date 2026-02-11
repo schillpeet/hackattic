@@ -9,6 +9,7 @@ import hackattic.challenges.DockerizedSolutions
 import hackattic.challenges.HelpMeUnpack
 import hackattic.challenges.JottingJWTs
 import hackattic.challenges.MiniMiner
+import hackattic.challenges.PasswordHashing
 import hackattic.challenges.ReadingQR
 import hackattic.challenges.TalesOfSSL
 import hackattic.challenges.TouchToneDialing
@@ -161,6 +162,11 @@ class HackatticDispatcher {
             Challenge.DockerizedSolutions -> {
                 val hackatticClient = getJavaHttpClient(token)
                 DockerizedSolutions(Challenge.DockerizedSolutions.snakeCaseName, hackatticClient, host).run(playground)
+            }
+
+            Challenge.PasswordHashing -> {
+                val hackatticClient = getJavaHttpClient(token)
+                PasswordHashing(Challenge.PasswordHashing.snakeCaseName, hackatticClient).run(playground)
             }
         }
     }

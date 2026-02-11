@@ -61,12 +61,13 @@ I have written down my thoughts/insights on the challenges in the docs about the
 - Touch-Tone dialing ✅
 - Collision course ✅
 - Basic face detection ✅
+- Password hashing ✅
 
 The following challenges require running your own reachable server. 
 See `docs/TUNNELING_GENERAL_SERVER_SETUP.md` for details.
 
 - Jotting JWTs ✅
-- ...
+- Dockerized solutions ✅
 
 ## Solved Secrets (all 😎)
 
