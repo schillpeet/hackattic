@@ -39,7 +39,7 @@ class HostingGit(
 //        val credentials = mapper.readValue(problem, HostingGitProblem::class.java)
 //            .also { println(it) }
         val credentials = HostingGitProblem(
-            sshKey = "sshKey=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDog0/SdLmysud83Zmte3H+jonJq7NVELk4TaXfovSoQwcvQQUqsq1uC+ruiQSp9v8EylZep8Gs8RTF4sqCKzdqn8qWL3KrqNERhDwv9e/aYT21Ug9ub9M1UJm1mI4wQExgYdJDlqiIERZILqYCDiywM8yvXjncnpAw7wk0LIRuXhiEJTXYBw/IMUbToIoBQamg1bfpPGqcTBIHRNbFOjjDnr6bMUPb93fMinfk8Mz6EIVtPMcveclZHMnSWYOyKSEZsgTHyuJVyA3y8b6e5sNsDEWAw2/MbRsLTSAMp8NzPAy/TMHiKr4LZtm/784NmENCcb35wbnPh/jEuryzVCaqQYdULNls+AQ9w+03l5jxmoWkI0i5DuAxU/CtbMeawyXXrH3TeYk6G/Yvc0+QyWOD5G+iSFsWLvL9TfCPKu+RcKwiTSmFsFMLOLoe1fIuljuFAJfALfMX8uQqGxB2azYiVFkzMWOJDTASTNI9790xSqVrGmMoGViL0eMonmEII8xMA+q9igSsq3dBb+JrUy5LmDY32j0PAvQJPq/10WyrPwumJIjEMpQ9/rGy3Ywvcph/npAGJ0QnIWsh0EVQMfVUca+bDqYotqC6Rm8fCqQSLIIzgTF0aavhNuwzdeI3QaadkXy5PXCtcJeTf9dEOa1O0UV4I3xnWo+dEilF68TzGw== hosting_git",
+            sshKey = "",,
             username = "hack",
             repoPath = "little/snow.git",
             pushToken = "49d3b441.5107.4a95.9bdc.e23123b5cc1d"
@@ -47,7 +47,9 @@ class HostingGit(
 
 
         // to be sure there is no further image
-        ProcessBuilder("docker", "rm", "-f", "openssh-server").start().waitFor()
+        ProcessBuilder("docker", "rm", "-f", "openssh-server")
+		.redirectErrorStream(true)	
+		.start().waitFor()
 
         // build docker image
         ProcessBuilder(
@@ -56,7 +58,7 @@ class HostingGit(
             "--build-arg", "PUBLIC_KEY=${credentials.sshKey}",
             "--build-arg", "REPO_PATH=${credentials.repoPath}",
             "-t", "challenge-image", "."
-        ).start().waitFor()
+        ).redirectErrorStream(true).start().waitFor()
 
         // start the container
         ProcessBuilder(
@@ -66,6 +68,15 @@ class HostingGit(
             "challenge-image"
         ).start()
 
+	Thread.sleep(3000)
+	
+	ProcessBuilder(
+    "docker", "exec", "openssh-server",
+    "sh", "-c",
+    "mkdir -p /config/${credentials.repoPath} && " +
+    "git init --bare /config/${credentials.repoPath} && " +
+    "chown -R ${credentials.username}:${credentials.username} /config/${credentials.repoPath}"
+).start().waitFor()
 
         // trigger endpoint
         val myHost = mapper.writeValueAsString(HostingGitTrigger(host))
