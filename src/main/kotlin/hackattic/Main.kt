@@ -1,5 +1,5 @@
 package hackattic
 
 fun main() {
-    HackatticDispatcher().run(Challenge.PasswordHashing, false)
+    HackatticDispatcher().run(Challenge.HostingGit, false)
 }

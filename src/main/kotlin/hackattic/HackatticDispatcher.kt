@@ -7,6 +7,7 @@ import hackattic.challenges.BruteForceZip
 import hackattic.challenges.CollisionCourse
 import hackattic.challenges.DockerizedSolutions
 import hackattic.challenges.HelpMeUnpack
+import hackattic.challenges.HostingGit
 import hackattic.challenges.JottingJWTs
 import hackattic.challenges.MiniMiner
 import hackattic.challenges.PasswordHashing
@@ -167,6 +168,11 @@ class HackatticDispatcher {
             Challenge.PasswordHashing -> {
                 val hackatticClient = getJavaHttpClient(token)
                 PasswordHashing(Challenge.PasswordHashing.snakeCaseName, hackatticClient).run(playground)
+            }
+
+            Challenge.HostingGit -> {
+                val hackatticClient = getJavaHttpClient(token)
+                HostingGit(Challenge.HostingGit.snakeCaseName, hackatticClient, host).run(playground)
             }
         }
     }

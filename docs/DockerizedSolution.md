@@ -3,7 +3,7 @@
 If you open the tunnel, you have to change the port to the host port, not the container port.^^
 
 ```shell
-$ cloudflared tunnel --url http://localhost:5001
+$ cloudflared tunnel run --url http://localhost:5001 hackattic-tunnel
 ```
 
 ## General
