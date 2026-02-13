@@ -85,7 +85,7 @@ class HostingGit(
         val psGetSecret = ProcessBuilder(
             "docker", "exec", "-u", credentials.username,
             "openssh-server", "git", "-C", "/config/${credentials.repoPath}",
-            "show", "main:solution.txt"
+            "show", "master:solution.txt"
         ).start()
         val solutionTxt = psGetSecret.inputStream.bufferedReader().readText().trim()
             .also { println("solutionTxt: $it") }
