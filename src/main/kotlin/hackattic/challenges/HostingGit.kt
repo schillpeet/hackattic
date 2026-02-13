@@ -27,23 +27,17 @@ class HostingGit(
 ) : ITask {
     fun triggerUrl(token: String) = "_/git/$token"
 
-    /**
-     * Testing:
-     * host should be: challenge.mnemobyte.de
-     * $ git remote add origin hack@challenge.mnemobyte.de:little/snow.git
-     * $ git push origin main
-     */
     override fun run(playground: Boolean) {
         val mapper = jacksonObjectMapper()
-//        val problem = hackatticClient.getProblem(challengeName)
-//        val credentials = mapper.readValue(problem, HostingGitProblem::class.java)
-//            .also { println(it) }
-        val credentials = HostingGitProblem(
-            sshKey = "",,
-            username = "hack",
-            repoPath = "little/snow.git",
-            pushToken = "49d3b441.5107.4a95.9bdc.e23123b5cc1d"
-        )
+        val problem = hackatticClient.getProblem(challengeName)
+        val credentials = mapper.readValue(problem, HostingGitProblem::class.java)
+            .also { println("credentials: $it") }
+//        val credentials = HostingGitProblem(
+//            sshKey = "",
+//            username = "hack",
+//            repoPath = "little/snow.git",
+//            pushToken = "49d3b441.5107.4a95.9bdc.e23123b5cc1d"
+//        )
 
 
         // to be sure there is no further image
@@ -68,23 +62,24 @@ class HostingGit(
             "challenge-image"
         ).start()
 
-	Thread.sleep(3000)
-	
-	ProcessBuilder(
-    "docker", "exec", "openssh-server",
-    "sh", "-c",
-    "mkdir -p /config/${credentials.repoPath} && " +
-    "git init --bare /config/${credentials.repoPath} && " +
-    "chown -R ${credentials.username}:${credentials.username} /config/${credentials.repoPath}"
-).start().waitFor()
+        Thread.sleep(3000)
+
+        ProcessBuilder(
+            "docker", "exec", "openssh-server",
+            "sh", "-c",
+            "mkdir -p /config/${credentials.repoPath} && " +
+            "git init --bare /config/${credentials.repoPath} && " +
+            "chown -R ${credentials.username}:${credentials.username} /config/${credentials.repoPath}"
+        ).start().waitFor()
 
         // trigger endpoint
         val myHost = mapper.writeValueAsString(HostingGitTrigger(host))
             .also { println("myHost: $it") }
-//        hackatticClient.triggerEndpoint(triggerUrl(credentials.pushToken), myHost)
-        println("let us sleep")
-        Thread.sleep(15_000)
-        println("wake up")
+        hackatticClient.triggerEndpoint(triggerUrl(credentials.pushToken), myHost)
+
+//        println("let us sleep")
+//        Thread.sleep(15_000)
+//        println("wake up")
 
         // read secret
         val psGetSecret = ProcessBuilder(
@@ -97,7 +92,7 @@ class HostingGit(
 
         psGetSecret.waitFor()
 
-//        val solution = mapper.writeValueAsString(HostingGitSolution(solutionTxt))
-//        hackatticClient.submitSolution(challengeName, solution, playground)
+        val solution = mapper.writeValueAsString(HostingGitSolution(solutionTxt))
+        hackatticClient.submitSolution(challengeName, solution, playground)
     }
 }

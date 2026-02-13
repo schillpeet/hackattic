@@ -178,6 +178,3 @@ hack@<repo_host>:folly/woot.git (here for username = hack and repo_path = folly/
 So, I guess, I have so symlink the bare repo, because, internally `git init --bare woot.git`
 will always create `config/woot.git`. So I can symlink this with:
 
-```shell
-$ sudo ln -s config/folly folly
-```
