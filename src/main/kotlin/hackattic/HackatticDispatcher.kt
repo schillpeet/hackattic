@@ -74,6 +74,7 @@ class HackatticDispatcher {
         val token: String = dotenv()["HACKATTIC_TOKEN"] ?: error("HACKATTIC_TOKEN not set")
         val myAppUrl: String = dotenv()["OWN_APP_URL"] ?: error("OWN_APP_URL not set")
         val host: String = dotenv()["HOST"] ?: error("HOST not set")
+        val vpsHost: String = dotenv()["VPS_HOST"] ?: error("VPS_HOST not set")
 
         when (name) {
             Challenge.HelpMeUnpack -> {
@@ -172,7 +173,7 @@ class HackatticDispatcher {
 
             Challenge.HostingGit -> {
                 val hackatticClient = getJavaHttpClient(token)
-                HostingGit(Challenge.HostingGit.snakeCaseName, hackatticClient, host).run(playground)
+                HostingGit(Challenge.HostingGit.snakeCaseName, hackatticClient, vpsHost).run(playground)
             }
         }
     }
