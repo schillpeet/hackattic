@@ -32,18 +32,11 @@ class HostingGit(
         val problem = hackatticClient.getProblem(challengeName)
         val credentials = mapper.readValue(problem, HostingGitProblem::class.java)
             .also { println("credentials: $it") }
-//        val credentials = HostingGitProblem(
-//            sshKey = "",
-//            username = "hack",
-//            repoPath = "little/snow.git",
-//            pushToken = "49d3b441.5107.4a95.9bdc.e23123b5cc1d"
-//        )
-
 
         // to be sure there is no further image
         ProcessBuilder("docker", "rm", "-f", "openssh-server")
-		.redirectErrorStream(true)	
-		.start().waitFor()
+		    .redirectErrorStream(true)
+		    .start().waitFor()
 
         // build docker image
         ProcessBuilder(
@@ -77,9 +70,6 @@ class HostingGit(
             .also { println("myHost: $it") }
         hackatticClient.triggerEndpoint(triggerUrl(credentials.pushToken), myHost)
 
-//        println("let us sleep")
-//        Thread.sleep(15_000)
-//        println("wake up")
 
         // read secret
         val psGetSecret = ProcessBuilder(

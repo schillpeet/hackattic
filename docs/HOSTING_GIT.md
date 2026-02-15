@@ -1,5 +1,54 @@
 # Hosting git
 
+## Solution
+
+![vpsScetch](pics/vps-git-scetch.png)
+
+## VPS Firewall Configuration
+
+For this task, I set up a VPS server with an Ubuntu image. After defining all incoming and outgoing firewall rules, I cloned my project from GitHub and started it via Gradle.
+
+The firewall configuration was crucial for proper operation:
+
+### Incoming Rules (Inbound Traffic)
+
+| Port | Protocol | Purpose |
+|------|----------|---------|
+| 22 | TCP | SSH access to VPS (Ubuntu host) |
+| 80 | TCP | HTTP (optional, for future web services) |
+| 443 | TCP | HTTPS (optional, for future web services) |
+| 2223 | TCP | SSH access to Ubuntu (moved from default 22 to free up port 22 for Docker) |
+
+**Note**: Port 22 is forwarded to the Docker container (port 2222) for the Git SSH server, while the Ubuntu host SSH runs on port 2223.
+
+### Outgoing Rules (Outbound Traffic)
+
+| Port | Protocol | Purpose |
+|------|----------|---------|
+| 53 | UDP | **DNS** - Required for domain name resolution (critical for `apk`, `apt`, etc.) |
+| 80 | TCP | **HTTP** - Required for Alpine package manager (`apk`) inside Docker container |
+| 123 | UDP | **NTP** - Time synchronization |
+| 443 | TCP | **HTTPS** - Secure connections (Docker pull, git clone, package updates) |
+| * | ICMP | **Ping/Diagnostics** - Network troubleshooting |
+
+### Critical Learning: DNS is UDP Port 53
+
+Initially, Docker builds failed with `Socket not connected` errors when trying to install packages. The issue was missing outbound firewall rules:
+
+1. **UDP 53 (DNS)** - Without this, containers cannot resolve domain names like `dl-cdn.alpinelinux.org`
+2. **TCP 80 (HTTP)** - Alpine's package repositories use HTTP by default
+3. **ICMP** - Used for ping diagnostics (not strictly required for functionality)
+
+### Why These Ports Matter
+
+- **DNS (UDP 53)**: First step in any network request - translates hostnames to IP addresses
+- **HTTP (TCP 80)**: Alpine Linux packages are distributed over HTTP (not HTTPS)
+- **HTTPS (TCP 443)**: Most modern services use encrypted connections
+- **NTP (UDP 123)**: Keeps system time accurate (important for TLS certificates, logs, etc.)
+- **ICMP**: Enables ping for network diagnostics
+
+---
+
 Start the Dockerfile:
 
 ```shell
@@ -82,7 +131,7 @@ Important:
 > 1. For the challenge we need also the env e.g. `-e "USER_NAME=john"` in the command, otherwise,
 the we have to take `linuxserver.io`!
 > 2. we have to change the port from 2222 to 22, because git will use 22 for ssh ⇒ -p 22:2222
-> 3. then, we haven't so add the prefix `ssh://` as well
+> 3. then, we haven't add the prefix `ssh://` as well
 > 4. maybe, we will not need the symlink (see below), because /config is my home directory in the container
 
 ## Connect with openssh-server
@@ -174,7 +223,3 @@ Date:   Thu Feb 12 19:06:32 2026 +0100
 
 The challenge says `The final repo URL we try connecting to is usually something like 
 hack@<repo_host>:folly/woot.git (here for username = hack and repo_path = folly/woot.git).`.
-
-So, I guess, I have so symlink the bare repo, because, internally `git init --bare woot.git`
-will always create `config/woot.git`. So I can symlink this with:
-
