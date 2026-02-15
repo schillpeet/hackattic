@@ -10,11 +10,19 @@ Basic setup:
 $ echo -e HACKATTIC_TOKEN=<YOUR_HACKATTIC_TOKEN> > .env
 ```
 
-If you need your own server:
+If you need your own server...
+
+...for tunneling:
 
 ```shell
 $ echo OWN_APP_URL=<OWN_APP_URL> >> .env
 $ echo HOST=<OWN_HOST> >> .env
+```
+
+...for VPS server:
+
+```shell
+$ echo VPS_HOST=<VPS_HOST> >> .env
 ```
 
 _INFO: I implemented `dotenv()` to get my token but there are other
@@ -65,10 +73,18 @@ I have written down my thoughts/insights on the challenges in the docs about the
 - Password hashing ✅
 
 The following challenges require running your own reachable server. 
-See `docs/TUNNELING_GENERAL_SERVER_SETUP.md` for details.
+See `docs/TUNNELING_GENERAL_SERVER_SETUP.md` for details on how to setup
+your own Cloudflare Tunnel:
 
 - Jotting JWTs ✅
 - Dockerized solutions ✅
+
+For the following task, using a Cloudflare Tunnel was not feasible.
+It requires a stable public IP address and SSH port forwarding,
+which are not reliably supported with Cloudflare Tunnels. See 
+`HOSTING_GIT.md` for additional notes.
+
+- Hosting Git ✅
 
 ## Solved Secrets (all 😎)
 
