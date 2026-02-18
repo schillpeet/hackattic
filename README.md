@@ -85,6 +85,7 @@ which are not reliably supported with Cloudflare Tunnels. See
 `HOSTING_GIT.md` for additional notes.
 
 - Hosting Git ✅
+- Serving Dns ✅
 
 ## Solved Secrets (all 😎)
 
