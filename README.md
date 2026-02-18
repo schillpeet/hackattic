@@ -23,6 +23,7 @@ $ echo HOST=<OWN_HOST> >> .env
 
 ```shell
 $ echo VPS_HOST=<VPS_HOST> >> .env
+$ echo MY_IP=<MY_IP> >> .env
 ```
 
 _INFO: I implemented `dotenv()` to get my token but there are other
