@@ -59,6 +59,9 @@ dependencies {
 
     // jwt
     implementation("com.auth0:java-jwt:4.5.0")
+
+    // dns
+    implementation("dnsjava:dnsjava:3.6.4")
 }
 
 tasks.test {

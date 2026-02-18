@@ -1,5 +1,5 @@
 package hackattic
 
 fun main() {
-    HackatticDispatcher().run(Challenge.HostingGit, false)
+    HackatticDispatcher().run(Challenge.ServingDns, false)
 }

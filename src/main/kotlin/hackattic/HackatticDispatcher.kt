@@ -12,6 +12,7 @@ import hackattic.challenges.JottingJWTs
 import hackattic.challenges.MiniMiner
 import hackattic.challenges.PasswordHashing
 import hackattic.challenges.ReadingQR
+import hackattic.challenges.ServingDNS
 import hackattic.challenges.TalesOfSSL
 import hackattic.challenges.TouchToneDialing
 import hackattic.challenges.VisualBasicMath
@@ -75,6 +76,7 @@ class HackatticDispatcher {
         val myAppUrl: String = dotenv()["OWN_APP_URL"] ?: error("OWN_APP_URL not set")
         val host: String = dotenv()["HOST"] ?: error("HOST not set")
         val vpsHost: String = dotenv()["VPS_HOST"] ?: error("VPS_HOST not set")
+        val myIP: String = dotenv()["MY_IP"] ?: error("MY_IP not set")
 
         when (name) {
             Challenge.HelpMeUnpack -> {
@@ -174,6 +176,11 @@ class HackatticDispatcher {
             Challenge.HostingGit -> {
                 val hackatticClient = getJavaHttpClient(token)
                 HostingGit(Challenge.HostingGit.snakeCaseName, hackatticClient, vpsHost).run(playground)
+            }
+
+            Challenge.ServingDns -> {
+                val hackatticClient = getJavaHttpClient(token)
+                ServingDNS(Challenge.ServingDns.snakeCaseName, hackatticClient, myIP).run(playground)
             }
         }
     }
