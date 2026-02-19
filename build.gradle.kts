@@ -62,6 +62,9 @@ dependencies {
 
     // dns
     implementation("dnsjava:dnsjava:3.6.4")
+
+    // redis
+    implementation("redis.clients:jedis:7.3.0")
 }
 
 tasks.test {

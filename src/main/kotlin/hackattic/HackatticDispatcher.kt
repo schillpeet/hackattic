@@ -14,6 +14,7 @@ import hackattic.challenges.PasswordHashing
 import hackattic.challenges.ReadingQR
 import hackattic.challenges.ServingDNS
 import hackattic.challenges.TalesOfSSL
+import hackattic.challenges.TheRedisOne
 import hackattic.challenges.TouchToneDialing
 import hackattic.challenges.TrivialFiling
 import hackattic.challenges.VisualBasicMath
@@ -188,6 +189,11 @@ class HackatticDispatcher {
             Challenge.TrivialFiling -> {
                 val hackatticClient = getJavaHttpClient(token)
                 TrivialFiling(Challenge.TrivialFiling.snakeCaseName, hackatticClient, vpsHostTFTP).run(playground)
+            }
+
+            Challenge.TheRedisOne -> {
+                val hackatticClient = getJavaHttpClient(token)
+                TheRedisOne(Challenge.TheRedisOne.snakeCaseName, hackatticClient).run(playground)
             }
         }
     }
