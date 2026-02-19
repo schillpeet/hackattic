@@ -87,6 +87,7 @@ which are not reliably supported with Cloudflare Tunnels. See
 
 - Hosting Git ✅
 - Serving Dns ✅
+- Trivial filing ✅ (no points for that??? https://hackattic.com/challenges/trivial_filing)
 
 ## Solved Secrets (all 😎)
 

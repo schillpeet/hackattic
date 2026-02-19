@@ -8,7 +8,7 @@ enum class Secret: Task { Secret00, Secret01 }
 enum class Challenge: Task {
     HelpMeUnpack, TalesOfSSL, BruteForceZip, AGlobalPresence, VisualBasicMath, BackupRestore, MiniMiner,
     WebsocketChitChat, ReadingQr, TouchToneDialing, CollisionCourse, BasicFaceDetection, JottingJwts,
-    DockerizedSolutions, PasswordHashing, HostingGit, ServingDns;
+    DockerizedSolutions, PasswordHashing, HostingGit, ServingDns, TrivialFiling;
 
     val snakeCaseName: String get() = name.toSnakeCase()
 
